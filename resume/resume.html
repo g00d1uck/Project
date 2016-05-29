@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Kely's Portflio</title>
+  <link rel="stylesheet" href="css/resume.css">
+  <style>
+    html,body,ul,li,h3{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      padding: 20px;
+      background-color: #e0e0e0;
+      font-family: 'Helvetica Neue',Helvetica,'Lucida Grande',Arial,'Hiragino Sans GB',微软雅黑,'WenQuanYi Micro Hei',STHeiti,SimSun,sans-serif;
+    }
+    .ct{
+      width: 980px;
+      margin: 0 auto;
+    }
+    li{
+      list-style: none;
+    }
+    .clear-float::after{
+      content: "";
+      display: block;
+      clear: both;
+    }
+    #aside{
+      float: left;
+      color: #000;
+      box-sizing: border-box;
+      padding: 20px;
+      width: 300px;
+      background-color: #00bfa5; 
+    }
+    #main{
+      float: right;
+      box-sizing: border-box;
+      width: 680px;
+      padding: 0 20px;
+      background-color: #f0f2f1;
+    }
+    #aside .img-box{
+      margin: 0 auto;
+      background: url(head.png);
+      background-size: cover;
+      width: 150px;
+      height: 150px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+    }
+    #aside .head{
+      text-align: center;
+    }
+    #aside span.web{
+      font-size: 26px;
+    }
+    #aside .info{
+      margin-top: 30px;
+    }
+    #aside .judge{
+      margin: 30px 0;
+    }
+    #aside .judge li{
+      margin: 20px 0;
+    }
+    #aside .skill-tag .skill-box{
+      float: right;
+      width: 170px;
+      height: 15px;
+      border-radius: 8px;
+      background-color: #00796b;
+    }
+    #aside .skill-tag .skill-box1{
+      float: right;
+      margin-top: 8px;
+      width: 170px;
+      height: 15px;
+      border-radius: 8px;
+      background-color: #00796b;
+    }
+    #aside .skill-tag .line{
+      background-color: #fff;
+      height: 15px;
+      border-radius: 8px 0 0 8px;
+    }
+    #aside .skill-tag .line1{
+      width: 85%;
+    }
+    #aside .skill-tag .line2{
+      width: 75%;
+    }
+    #aside .skill-tag .line3{
+      width: 70%;
+    }
+    #aside .skill-tag .line4{
+      width: 75%;
+    }
+    #aside .skill-tag .line5{
+      width: 50%;
+    }
+    #main h3{
+      line-height: 22px;
+      margin-top: 15px;
+      font-size: 22px;
+      color: #00796b;
+    }
+    #main .skill li{
+      margin-top: 10px;
+    }
+    #main .skill{
+      line-height: 1.5;
+    }
+    #main .icon-cog-outline:before{
+      float: left;
+      padding: 3px 3px 10px 0;
+    }
+    #main .project ul{
+      margin-left: 10px;
+    }
+    #main .project a{
+      float: right;
+      font-size: 14px;
+      margin: 5px;
+      padding: 0 5px 0 0;
+      border-radius: 5px;
+      color: #00796b;
+      border: 1px solid #00796b;
+      text-decoration: none;
+    }
+    #main h3 span{
+      font-size: 30px;
+    }
+    #main .icon-tag-empty{
+      font-size: 18px;
+      position: relative;
+      left: -12px;
+      top: -1px;
+      border-radius: 5px;
+      color: #fff;
+      background-color: teal;
+    }
+    #main .project h4{
+      font-size: 16px;
+      margin: 0;
+    }
+    #main .project p{
+      margin: 0 0 0 20px;
+      padding: 5px 0 15px 0;
+      color: #212121;
+    }
+    #main .project li{
+      border-left: 2px solid #00796b;
+    }
+    #main .work p{
+      line-height: 1.7;
+    }
+    aside{
+      display: none;
+      position: fixed;
+      right: 0;
+      top: 30%;
+    }
+    aside li{
+      margin-bottom: 10px;
+      padding: 10px 30px 10px 20px;
+      border-radius: 20px 0 0 20px;
+      background-color: #00bfa5;
+    }
+    aside a{
+      color: #fff;
+      text-decoration: none;
+    } 
+  </style>
+</head>
+<body>
+<aside>
+  <ul>
+    <li><a href="">源代码</a></li>
+    <li><a href="">PDF下载</a></li>
+    <li><a href="">Blog</a></li>
+    <li><a href="">GitHub</a></li>
+  </ul>
+</aside>
+  <div class="ct clear-float">
+    <div id="main">
+      <div class="skill">
+        <h3><span class="icon-tools"></span> Skill. 职业技能</h3>
+        <hr>
+        <ul>
+          <li class="icon-cog-outline">熟悉 Html/CSS，掌握浮动、定位、盒模型、BFC 等核心概念，掌握常见的布局方式。</li>
+          <li class="icon-cog-outline">对代码可读性、规范性、复用性、语义化有一定认识，对CSS兼容有一定经验，能熟练开发符合w3c规范的常见页面。</li>
+          <li class="icon-cog-outline">熟悉原生JavaScript的使用，掌握事件模型、DOM操作、Ajax、Jsonp、闭包、原型链、继承等相关概念的原理和使用方法。</li>
+          <li class="icon-cog-outline">能使用原生js封装通用函数库，实现如轮播、Tab切换卡、懒加载、Dialog、表单验证、Ajax等常见效果。</li>
+          <li class="icon-cog-outline">熟练Jquery的使用，熟练使用Jquery开发常见页面的效果、能够实现如轮播、 Tab切换卡、懒加载、Dialog、表单验证、Ajax等常见效果实现组件化封装。</li>
+          <li class="icon-cog-outline">熟悉Git、Sublime、Vim等前端相关工具的使用。</li>
+          <li class="icon-cog-outline">对前端工程化、模块化有一定认识，能使用RequireJs实现模块化开发、能使用NPM、Gulp打造基本的自动化流程。</li>
+          <li class="icon-cog-outline">熟悉互联网产品流程、前端开发流程、前后端协同开发流程。</li>
+        </ul>
+      </div>
+      <div class="project">
+      <h3><span class="icon-newspaper"></span> Project. 项目经验</h3>
+        <hr>
+        <ul>
+          <li>
+            <h4 class="clear-float"><span class="icon-tag-empty"></span>静态页面示例<a href="" class="icon-link">Demo</a><a href="" class="icon-link">源代码</a></h4>
+            <p>综合运用html/css去制作布局，根据语义化选择标签，搭配浮动、定位和css样式。</p>
+          </li>
+          <li>
+            <h4 class="clear-float"><span class="icon-tag-empty"></span>轮播<a href="" class="icon-link">Demo</a><a href="" class="icon-link">源代码</a></h4>
+            <p>将多张图片利用浮动排成一行，js操作定位位置移动图片，形成图片轮播的效果，可自动轮播也可单击选定图片。</p>
+          </li>
+          <li>
+            <h4 class="clear-float"><span class="icon-tag-empty"></span>懒加载&瀑布流<a href="" class="icon-link">Demo</a><a href="" class="icon-link">源代码</a></h4>
+            <p>通过ajax-jsonp获取数据，将得到的图片和标题拼接成Dom元素填充到页面上，按照瀑布流方式放置，当下拉到页面底部时，再次发送ajax请求数据重复操作呈现出来。</p>
+          </li>
+          <li>
+            <h4 class="clear-float"><span class="icon-tag-empty"></span>模块化动态页面<a href="" class="icon-link">Demo</a><a href="" class="icon-link">源代码</a></h4>
+            <p>页面搭配全屏轮播、回到顶部、渐显、瀑布流等模块化组件，形成一个综合的动态页面效果，并用require.js打包压缩。</p>
+          </li>
+        </ul>
+      </div>
+      <div class="work">
+        <h3><span class="icon-briefcase"></span> Work. 工作经验</h3>
+        <hr>
+        <p>富士康科技集团   2014.7~2016.4   工艺设备工程师</p>
+        <p>因同事转行进入互联网，互相交流，从而了解到了互联网行业及前端开发等技术岗位，被前端这种‘所见即所得的’的编程形式所吸引，加之本身对编程的浓厚兴趣及对技术的追求渴望，希望能自己动手做些有趣实用的东西，也喜欢互联网开放、自由的环境。故而于今年3月份投身前端，开始通过网络和书籍进行学习，4月份开始通过线上视频及练习学习巩固，怀着热情不断学习总结一路走来，希望能实现我的前端梦！</p>
+      </div>
+    </div>
+    <div id="aside">
+      <div class="head">
+        <div class="img-box"></div>
+        <h1>柯良勇</h1>
+        <span>求职意向</span><span class="web"> Web前端开发</span>
+      </div>
+      <div class="info">
+        <h3 class="icon-bookmark">个人信息</h3>
+        <hr>
+        <p class="icon-user">年龄：25岁</p>
+        <p class="icon-location">住址：广东-深圳</p>
+        <p class="icon-phone">电话：18576783170</p>
+        <p class="icon-mail">邮箱：keliangyong@gmail.com</p>
+        <p class="icon-book-open">专业：机械设计制造及其自动化</p>
+        <p class="icon-graduation-cap">学校：福州大学（本科 2010级）</p>
+      </div>
+      <div class="judge">
+        <h3 class="icon-bookmark">自我评价</h3>
+        <hr>
+        <ul>
+          <li class="icon-star-filled">浓烈的技术热情与学习欲望</li>
+          <li class="icon-star-filled">强大的自学能力与自我总结习惯</li>
+          <li class="icon-star-filled">端正的态度与直面问题的信念</li>
+          <li class="icon-star-filled">有分析、转化、解决问题的能力</li>
+          <li class="icon-star-filled">执着的工匠精神与强迫症</li>
+        </ul>
+      </div>
+      <div class="skill-tag clear-float">
+        <h3 class="icon-bookmark">相关技能</h3>
+        <hr>
+        <div class="skill-box1"><div class="line line1"></div></div>
+        <p>Html</p>
+        <div class="skill-box"><div class="line line2"></div></div>
+        <p>CSS</p>
+        <div class="skill-box"><div class="line line3"></div></div>
+        <p>JavaScript</p>
+        <div class="skill-box"><div class="line line4"></div></div>
+        <p>Jquery</p>
+        <div class="skill-box"><div class="line line5"></div></div>
+        <p>工程化工具</p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
