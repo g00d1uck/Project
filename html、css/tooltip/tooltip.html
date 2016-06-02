@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>tooltip</title>
+  <style>
+    .tip1{
+      width: 100px;
+      height: 10px;
+      margin: 5px auto;
+      border:20px solid;
+      border-color: #00f #ff0 #0f0 #f00;
+    }
+    .tip2{
+      width: 0;
+      height: 0;
+      margin: 5px auto;
+      border:20px solid;
+      border-color: #00f #ff0 #0f0 #f00;
+    }
+    .tip3{
+      width: 0;
+      height: 0;
+      margin: 5px auto;
+      border:20px solid;
+      border-color: transparent transparent #0f0 transparent;
+    }
+    .tip4{
+      position: relative;
+      width: 200px;
+      height: 100px;
+      margin: 30px auto;
+      background-color: #6791b0;
+    }
+    .tip4-red{
+      position: absolute;
+      top: 0;
+      left: 180px;
+      width: 0;
+      height: 0;
+      border: 10px solid;
+      border-color: #fff #fff #3e576a #3e576a;
+    }
+    .tip5{
+      position: relative;
+      width: 200px;
+      height: 80px;
+      margin: 20px auto;
+      border: 1px solid #999;
+    }
+    .tip5-outline{
+      position: absolute;
+      top: -40px;
+      left: 20px;
+      width: 0;
+      height: 0;
+      border: 20px solid;
+      border-color: transparent transparent #999 transparent;
+    }
+    .tip5-hide{
+      position: absolute;
+      top: -39px;
+      left: 20px;
+      width: 0;
+      height: 0;
+      border: 20px solid;
+      border-color: transparent transparent white transparent;
+    }
+    .tip6{
+      position: relative;
+      width: 100px;
+      height: 50px;
+      margin: 30px auto;
+      color: #fff;
+      text-align: center;
+      line-height: 50px;
+      background-color: #25a6f7;
+    }
+    .tip6-gray{
+      position: absolute;
+      top: 50px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-width: 10px 15px 10px 15px;
+      border-style: solid;
+      border-color: #3e576a #3e576a transparent transparent;
+    }
+    .tip7{
+      position: relative;
+      width: 200px;
+      height: 50px;
+      margin: 50px auto;
+      border: 1px solid #999;
+    }
+    .tip7-outline{
+      position: absolute;
+      top: 15px;
+      left: -40px;
+      width: 0;
+      height: 0;
+      border-width: 10px 20px 10px 20px;
+      border-style: solid;
+      border-color: transparent #999 transparent transparent;
+    }
+    .tip7-hide{
+      position: absolute;
+      top: 15px;
+      left: -39px;
+      width: 0;
+      height: 0;
+      border-width: 10px 20px 10px 20px;
+      border-style: solid;
+      border-color: transparent white transparent transparent;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="tip1"></div>
+  <div class="tip2"></div>
+  <div class="tip3"></div>
+
+  <div class="tip4">
+    <div class="tip4-red"></div>
+    <p>折角效果</p>
+  </div>
+
+  <div class="tip5">
+    <div class="tip5-outline"></div>
+    <div class="tip5-hide"></div>
+    <p>气泡框效果</p>
+  </div>
+
+  <div class="tip6">
+    <div class="tip6-gray"></div>
+    <h3>折叠便签</h3>
+  </div>
+
+  <div class="tip7">
+    <div class="tip7-outline"></div>
+    <div class="tip7-hide"></div>
+    <p>聊天框/表单验证错误提示</p>
+  </div>
+
+</body>
+</html>

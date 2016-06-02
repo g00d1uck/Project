@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>For task 12-1</title>
+	<style>
+		body{
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+		#header h2,
+		#footer h2{
+			margin: 0;
+			padding: 10px;
+		}
+		#header{
+			background-color: #F90;
+			height: 50px;
+		}
+		#footer{
+			background-color: #9CF;
+			height: 50px;
+		}
+		.sider-l{
+			background-color: #ccc;
+			width: 300px;
+			float: left;
+			margin-left: -100%;
+			position: relative;
+			left: -300px;
+			height: 300px;
+		}
+		.sider-r{
+			background-color: #9FC;
+			width: 300px;
+			float: left;
+			margin-left: -300px;
+			position: relative;
+			left: 300px;
+			height: 300px;
+		}
+		#main{
+			background-color: #9C3;
+			float: left;
+			width: 100%;
+			height: 550px;
+		}
+		.ct:after{
+			content: "";
+			clear: both;
+			display: block;
+		}
+		.ct{
+			padding: 0 300px;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<h2>顶部</h2>
+	</div>
+	<div class="ct">
+		<div id="main">
+			<h1>圣杯三栏布局</h1>
+			<p>圣杯布局指两边顶宽，中间自适应的三栏布局，中间栏要在放在文档流前面以优先渲染。</p>
+			<p>圣杯布局的原理是利用负margin让两个浮动的固定宽度盒子进入到一个同样是<br>浮动且自适应宽度的盒子里面去，再用相对偏移做调整，步骤如下：</p>
+			<p>①一个宽度100%的盒子main浮动并设置padding做自适应主区块；<br>
+				②另外两个宽度固定的盒子side浮动并使用负margin分布于主区块的两边；<br>
+				③最后让两个side盒子做相对偏移到达main留出的空padding区。
+			</p>
+		</div>
+		<div class="sider-l">
+			<h2>左侧边栏</h2>
+			<p>固定宽度</p>
+		</div>
+		<div class="sider-r">
+			<h2>右侧边栏</h2>
+			<p>固定宽度</p>
+		</div>
+	</div>
+	<div id="footer">
+		<h2>底部</h2>
+	</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>html/css的运用</title>
+  <style>
+    html,ul{
+      margin: 0;
+      padding: 0;
+      background-color: #666; 
+      font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .ct{
+      text-align: center;
+      width: 600px;
+      margin: 0 auto;
+    }
+    .bg{
+      margin: 0 auto;
+      width: 475px;
+      height: 267px;
+      border: 1px solid #eee;
+      background: url(../bg.jpg); 
+    }
+    #head h1{
+      color: #fff;
+    }
+    #head p{
+      color: #fff;
+      opacity: 0.6;
+    }
+    #portflio,
+    #footer{
+      margin: 40px 0;
+    }
+    #footer a{
+      padding: 10px;
+      margin-right: 30px;
+      text-decoration: none;
+      color: #eee;
+      background-color: #883b61; 
+    }
+    .layout{
+      position: relative;
+    }
+    .layout-list{
+      display: none;
+      position: absolute;
+      background-color: #444;
+      top: 179px;
+      left: 684px;
+    }
+    .layout-list li{
+      padding: 7px 5px;
+      text-align: left;
+      list-style: none;
+    }
+    .layout-list li:hover{
+      background-color: teal;
+    }
+    #footer a:hover{
+      background-color: teal;
+    }
+    #portflio>li{
+      float: left;
+      margin-left: 55px;
+      padding: 10px;
+      list-style: none;
+      background-color: #883b61;
+    }
+    #portflio:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+    #portflio>li:hover{
+      background-color: teal;
+    }
+    #portflio li:hover .layout-list{
+      display: block;
+    }
+    #portflio li>a{
+      text-decoration: none;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="ct">
+    <div id="head">
+      <h1>Demo展示：Html CSS的综合运用</h1>
+      <p>分静态个人站、企业站、常见网站布局示例、三角形Tooltip 这4部分</p>
+    </div>
+
+    <ul id="portflio">
+      <li>
+        <a href="person/person.html">个人站</a>
+      </li>
+      <li>
+        <a href="company/company.html">企业站</a>
+      </li>
+      <li>
+        <a href="#" class="layout">布局范例</a>
+        <ul class="layout-list">
+          <li><a href="layout/单列布局.html">单列布局</a></li>
+          <li><a href="layout/两列布局.html">两列布局</a></li>
+          <li><a href="layout/混合三列.html">混合三列布局</a></li>
+          <li><a href="layout/双飞翼3栏.html">双飞翼三列布局</a></li>
+          <li><a href="layout/圣杯3栏.html">圣杯三列布局</a></li>
+          <li><a href="layout/双飞翼改2栏.html">双飞翼改两列</a></li>
+          <li><a href="layout/圣杯改2栏.html">圣杯改两列</a></li>
+        </ul>       
+      </li>
+      <li>
+        <a href="tooltip/tooltip.html">三角Tooltip</a>
+      </li>
+    </ul>
+
+    <div class="bg"></div>
+    <div id="footer">
+      <a href="https://github.com/keliangyong/Project">查看作品源码</a>      
+    </div>
+
+  </div>
+</body>
+</html>

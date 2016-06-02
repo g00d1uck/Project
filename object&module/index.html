@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jquery常见效果</title>
+  <style>
+    html{
+      margin: 0;
+      padding: 0;
+      background-color: #666; 
+      font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .ct{
+      text-align: center;
+      width: 1000px;
+      margin: 0 auto;
+    }
+    .bg{
+      margin: 0 auto;
+      width: 475px;
+      height: 267px;
+      border: 1px solid #eee;
+      background: url(../bg.jpg); 
+    }
+    #head h1{
+      color: #fff;
+    }
+    #head p{
+      color: #fff;
+      opacity: 0.6;
+    }
+    .portflio,
+    #footer{
+      margin: 40px 0;
+    }
+    .portflio a,
+    #footer a{
+      padding: 10px;
+      margin-right: 10px;
+      text-decoration: none;
+      color: #eee;
+      background-color: #883b61; 
+    }
+    .portflio>a:hover{
+      background-color: teal;
+    }
+    #footer>a:hover{
+      background-color: teal;
+    }
+  </style>
+</head>
+<body>
+  <div class="ct">
+    <div id="head">
+      <h1>Demo展示：面向对象编程、组件模块化</h1>
+      <p>对轮播、瀑布流、回到顶部等效果进行组件模块化，用面向对象的方式做了dialog弹窗和轮播效果，最后综合运用组件制作了一个动态页面</p>
+    </div>
+    <div class="portflio">
+      <a href="js/module/carousel.js">轮播组件</a>
+      <a href="js/module/waterFall.js">瀑布流、懒加载组件</a>
+      <a href="js/module/goTop.js">回到顶部组件</a>
+      <a href="js/module/expose.js">曝光加载组件</a>
+    </div>
+    <div class="portflio">
+      <a href="dialog.html">面向对象:dialog弹窗效果</a>
+      <a href="obj.carouse.html">面向对象:轮播效果</a>
+      <a href="module.html">组件综合页面效果</a>
+    </div>
+    <div class="bg"></div>
+    <div id="footer">
+      <a href="https://github.com/keliangyong/Project/object&module">查看作品源码</a>      
+    </div>
+  </div>
+</body>
+</html>

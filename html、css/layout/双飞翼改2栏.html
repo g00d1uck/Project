@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>For task 12-3</title>
+  <style>
+   html, body{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  #header h2,
+  #footer h2{
+    margin: 0;
+    padding: 10px;
+  }
+  #header, #footer{
+    background: #9CF;
+    height: 50px;
+  }
+  #main{
+    background: #9C3;
+    float: left;
+    width: 100%;
+  }
+  .sider-r{
+    background: #ccc;
+    float: left;
+    width: 300px;
+    margin-left: -300px;
+    height: 300px;
+  }
+  .ct::after{
+    content: "";
+    clear: both;
+    display: block;
+  }
+  #main .content{
+    margin: 0 300px;
+    height: 530px;
+  }
+</style>
+</head>
+<body>
+	<div id="header">
+    <h2>顶部</h2>
+  </div>
+  <div class="ct">
+    <div id="main">
+      <div class="content">
+        <h1>双飞翼两栏布局--在三栏的基础上去掉任一侧边栏</h1>
+        <p>两边顶宽，中间自适应三栏布局，中间栏放在文档流前面以优先渲染</p>
+        <p>是在三栏的基础上去掉任一侧边栏形成的</p>
+      </div>
+    </div>
+    <div class="sider-r">
+      <h2>右侧边栏</h2>
+      <p>固定宽度</p>
+    </div>
+  </div>
+  <div id="footer">
+    <h2>底部</h2>
+  </div>
+</body>
+</html>

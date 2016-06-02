@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Jquery常见效果</title>
+  <style>
+    html{
+      margin: 0;
+      padding: 0;
+      background-color: #666; 
+      font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    .ct{
+      text-align: center;
+      width: 1000px;
+      margin: 0 auto;
+    }
+    .bg{
+      margin: 0 auto;
+      width: 475px;
+      height: 267px;
+      border: 1px solid #eee;
+      background: url(../bg.jpg); 
+    }
+    #head h1{
+      color: #fff;
+    }
+    #head p{
+      color: #fff;
+      opacity: 0.6;
+    }
+    .portflio,
+    #footer{
+      margin: 40px 0;
+    }
+    .portflio a,
+    #footer a{
+      padding: 10px;
+      margin-right: 10px;
+      text-decoration: none;
+      color: #eee;
+      background-color: #883b61; 
+    }
+    .portflio>a:hover{
+      background-color: teal;
+    }
+    #footer>a:hover{
+      background-color: teal;
+    }
+  </style>
+</head>
+<body>
+  <div class="ct">
+    <div id="head">
+      <h1>Demo展示：Jquery常见效果的实现及插件</h1>
+      <p>使用实现了诸如轮播、stick up、tab切换、瀑布流等效果，并将部分效果封装为插件</p>
+    </div>
+    <div class="portflio">
+      <a href="Tab切换.html">Tab切换效果</a>
+      <a href="stickup.html">stickup效果</a>
+      <a href="carouse.html">轮播效果</a>
+      <a href="waterfall.html">懒加载&瀑布流效果</a>
+    </div>
+    <div class="portflio">
+      <a href="plug/stickup.js">stickup插件</a>
+      <a href="plug/lazyload.js">懒加载插件</a>
+      <a href="plug/waterset.js">瀑布流插件</a>
+    </div>
+    <div class="bg"></div>
+    <div id="footer">
+      <a href="https://github.com/keliangyong/Project/jquery">查看作品源码</a>      
+    </div>
+  </div>
+</body>
+</html>

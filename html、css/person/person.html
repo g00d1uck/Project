@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>For task 14</title>
+  <link rel="stylesheet" href="css/fontello.css">
+  <style>
+    html, body{
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    a{
+      text-decoration: none;
+    }
+    .container{
+      width: 960px;
+      margin: 0 auto;
+      padding: 40px 0; 
+    }
+    .vertical{
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .center{
+      text-align: center;
+    }
+    #header{
+      background: url(img/bg.jpg);
+      background-size: cover; 
+      display: table;
+      height: 100%;
+      width: 100%;
+      font-size: 16px;
+    }
+    .service-item>div{
+      float: left;
+      width: 200px;
+      margin: 30px 20px;
+      color: white;
+    } 
+    .vertical-text{
+      background: url(img/callout.jpg) no-repeat center center;
+      padding: 100px 0;
+    }
+    .vertical-text p{
+      font-size: 20px;
+      color: #fff;
+    }
+    .work-box{
+      float: left;
+      margin: 15px 15px;
+    }
+    .clear{
+      overflow: hidden;
+    }
+    #header img{
+      width: 180px;
+      height: 180px;
+      border: 5px solid #aee2d9;
+      border-radius: 50%;
+    }
+    #header h1{
+      font-size: 3.5em;
+      margin-bottom: -2px;
+    }
+    #header p{
+      margin-bottom: 30px;
+      font-size: 20px;
+    }
+    #header a:hover,
+    .work .dark-btn:hover{
+      background-color: #363f41;
+    }
+    .dark-btn{
+      padding: 10px;
+      color: white;
+      background-color: #6c7e84;
+    }
+    .white-btn{
+      padding: 10px;
+      color: black;
+      background-color: white;
+    }
+    .introduce p{
+      font-size: 18px;
+    }
+    .introduce a{
+      color: #337ab7;
+    }
+    .introduce a:hover{
+      text-decoration: underline;
+      color: #23527c;
+    }
+    .service, .click-look{
+      background-color: #337ab7;
+    }
+    .service h2{
+      font-size: 30px;
+      color: white;
+    }
+    hr{
+      width: 120px;
+    }
+    .service span{
+      font-size: 70px;
+    }
+    .service-item p,
+    .service-item a{
+      font-size: 12px;
+      margin-top: -5px;
+      margin-bottom: 20px;
+    }
+    .service-item a:hover,
+    .click-look .white-btn:hover{
+      background-color: #d6e4f0;
+    }
+    .vertical-text h1{
+      color: white;
+      font-size: 50px;
+    }
+    .work .dark-btn{
+      position: relative;
+      top: 17px;
+      font-size: 13px;
+    }
+    .work-box a:hover{
+      opacity: 0.8;
+    }
+    #footer .click-look .dark-btn{
+      background-color: #1f496e;
+      margin-left: 20px;
+    }
+    #footer .click-look .dark-btn:hover{
+      background-color: #0f2436;
+    }
+    #footer .click-look{
+      margin-top: 20px;
+    }
+    #footer .click-look h3{
+      color: white;
+      margin-bottom: 30px;
+    }
+    #footer .contact{
+      color: #1f496e;
+      font-size: 14px;
+    }
+    #footer .contact span{
+      font-size: 40px;
+    }
+    #footer .contact hr,
+    #content .work hr{
+      width: 100px;
+      opacity: 0.3;
+    }
+    #footer .contact a:hover{
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+	<div id="header">
+		<div class="container vertical center">
+      <img src="img/head.png" alt="head">
+      <h1>柯良勇</h1>
+      <p>一个走在路上的准前端工程师</p>
+      <a href="mailto:keliangyong@gmail.com" target="_blank" class="dark-btn">keliangyong@gmail.com</a>
+    </div>
+  </div>
+
+  <div id="content">
+    <div class="introduce">
+      <div class="container center">
+        <h2>给彼此一个互相沟通了解的机会！</h2>
+        <p>相信自己的选择，没错，<a href="mailto:keliangyong@gmail.com" target="_blank">就决定是你了</a>！</p>
+      </div>
+    </div>
+
+    <div class="service">
+      <div class="container center">
+        <h2>Skill. 工具技能</h2>
+        <hr>
+        <div class="service-item clear">
+          <div>
+            <span class="icon-html5"></span>
+            <h4>HTML(5)</h4>
+            <p>熟悉Html标签，对语义化有一定认识，能熟练开发符合W3C规范的常见页面。</p>
+            <a class="white-btn" href="#">Learn More</a>
+          </div>
+          <div>
+            <span class="icon-css"></span>
+            <h4>CSS(3)</h4>
+            <p>对CSS兼容有一定经验，掌握浮动、定位、盒模型、BFC等核心概念及常见的布局方式。</p>
+            <a class="white-btn" href="#">Learn More</a>
+          </div>
+          <div>
+            <span class="icon-keyboard"></span>
+            <h4>Javascript</h4>
+            <p>熟悉原生Javascript的使用，掌握DOM操作、Ajax、闭包、原型等概念及使用，能封装常用工具及组件。</p>
+            <a class="white-btn" href="#">Learn More</a>
+          </div>
+          <div>
+            <span class="icon-wrench"></span>
+            <h4>Jquery、Require.js、Git...</h4>
+            <p>熟悉Jquery的使用，能开发常见页面的效果，能够实现组件化封装;熟悉Git及模块打包等前端相关工具。</p>
+            <a class="white-btn" href="#">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="vertical-text">
+      <div class="container center">
+        <h1>Everyone Can Became a Hacker</h1>
+        <p>不要停止思考，不要停止学习，做一个优秀的"问题解决者"</p>
+      </div>
+    </div>
+
+    <div class="work">
+      <div class="container center clear">
+        <h1>Portflio. 作品项目</h1>
+        <hr>
+        <div class="work-box">
+          <a href="#"><img src="img/portfolio-1.jpg" alt="" width="450px" height="300px"></a>
+        </div>
+        <div class="work-box">
+          <a href="#"><img src="img/portfolio-2.jpg" alt="" width="450px" height="300px"></a>
+        </div>
+        <div class="work-box">
+          <a href="#"><img src="img/portfolio-3.jpg" alt="" width="450px" height="300px"></a>
+        </div>
+        <div class="work-box">
+          <a href="#"><img src="img/portfolio-4.jpg" alt="" width="450px" height="300px"></a>
+        </div>
+        <a href="#" class="dark-btn">View More Items</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="footer">
+  <div class="click-look">
+    <div class="container center">
+      <h3>查看更多关于我的信息，请点击！</h3>
+      <a class="white-btn" href="http://keliangyong.github.io/resume">个人简历</a>         
+      <a class="dark-btn" href="http://keliangyong.github.io">个人博客</a>
+    </div>
+  </div>
+  <div class="contact">
+    <div class="container center">
+      <h4>期待您的来电/来信</h4>
+      <p>广东-深圳</p>
+      <p class="icon-phone">(+86) 18576783170</p>
+      <p class="icon-mail"><a href="mailto:keliangyong@gmail.com" target="_blank">keliangyong@gmail.com</a></p>
+      <span class="icon-dribbble"></span>
+      <hr>
+      <p>Copyright © keliangyong.github.io 2016</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

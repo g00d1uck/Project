@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>For task 12-1</title>
+	<style>
+		body{
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+		#header h2,
+		#footer h2{
+			margin: 0;
+			padding: 10px;
+		}
+		#header{
+			background-color: #F90;
+			height: 50px;
+		}
+		#footer{
+			background-color: #9CF;
+			height: 50px;
+		}
+		.sider-l{
+			background-color: #ccc;
+			width: 300px;
+			float: left;
+			margin-left: -100%;
+			position: relative;
+			left: -300px;
+			height: 300px;
+		}
+		#main{
+			background-color: #9C3;
+			float: left;
+			width: 100%;
+			height: 550px;
+		}
+		.ct:after{
+			content: "";
+			clear: both;
+			display: block;
+		}
+		.ct{
+			padding: 0 0 0 300px;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		<h2>顶部</h2>
+	</div>
+	<div class="ct">
+		<div id="main">
+			<h1>圣杯两栏布局--在圣杯三栏的基础上去掉任一侧边栏</h1>
+			<p>圣杯布局指两边顶宽，中间自适应的三栏布局，中间栏要在放在文档流前面以优先渲染。</p>
+			<p>两栏是去掉任一侧边栏后形成的。</p>
+		</div>
+		<div class="sider-l">
+			<h2>左侧边栏</h2>
+			<p>固定宽度</p>
+		</div>
+	</div>
+	<div id="footer">
+		<h2>底部</h2>
+	</div>
+</body>
+</html>

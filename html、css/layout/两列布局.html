@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>两列布局</title>
+  <style>
+   body{
+    text-align: center;
+    margin: 0;
+    padding: 0;
+  }
+  .top{
+    height: 100px;
+    background: #9cf;
+  }
+  .top h2,
+  .footer h2{
+    margin: 0;
+    padding: 10px;
+  }
+  .main,
+  .footer{ 
+    width: 960px;
+    margin: 0 auto;
+  }
+  .side{ 
+    width: 220px; 
+    height: 500px; 
+    background: #ccc; 
+    float: left;
+  }
+  .middle{ 
+    width: 740px; 
+    height: 500px; 
+    background: #9C3; 
+    float: left;
+  }
+  .footer{ 
+    height: 50px; 
+    background: #9F9;
+    clear: both;
+  }
+</style>
+</head>
+<body>
+  <div class="top">
+    <h2>顶部</h2>
+  </div>
+  <div class="main">
+    <div class="side"><h2>侧边栏</h2></div>
+    <div class="middle"><h1>两列布局</h1></div>
+  </div>
+  <div class="footer"><h2>底部</h2></div>
+</body>
+</html>
+
+
+
+
+
+
+
