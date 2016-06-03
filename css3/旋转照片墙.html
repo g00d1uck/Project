@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>3D旋转</title>
+  <style>
+    html{
+      background-color: #ccc;
+    }
+    .ct{
+      height: 600px;
+      position: relative;
+      perspective: 2000px;
+    }
+    .cube{
+      position: absolute;
+      width: 511px;
+      height: 236px;
+      left: 50%;
+      top: 50%;
+      margin: -118px 0 0 -255.5px;
+      transform-style: preserve-3d;
+      animation: rotate 10s infinite;
+    }
+    .box{
+      position: absolute;
+      /*backface-visibility: hidden;*/
+      width: 511px;
+      height: 236px;
+    }
+    .top{
+      transform: rotateY(0deg) translateZ(500px);
+    }
+    .bottom{
+      transform: rotateY(60deg) translateZ(500px);
+    }
+    .left{
+      transform: rotateY(120deg) translateZ(500px);
+    }
+    .right{
+      transform: rotateY(180deg) translateZ(500px);
+    }
+    .front{
+      transform: rotateY(240deg) translateZ(500px);
+    }
+    .behind{
+      transform: rotateY(300deg) translateZ(500px);
+    }
+    @keyframes rotate {
+      0% {
+        -webkit-transform: rotateY(0deg);
+        transform: rotateY(0deg);
+      }
+      16.7% {
+        -webkit-transform: rotateY(60deg);
+        transform: rotateY(60deg);
+      }
+      33.3% {
+        -webkit-transform: rotateY(120deg);
+        transform: rotateY(120deg);
+      }
+      50% {
+        -webkit-transform: rotateY(180deg);
+        transform: rotateY(180deg);
+      }
+      66.7% {
+        -webkit-transform: rotateY(240deg);
+        transform: rotateY(240deg);
+      }
+      83.3% {
+        -webkit-transform: rotateY(300deg);
+        transform: rotateY(300deg);
+      }
+      100% {
+        -webkit-transform: rotateY(360deg);
+        transform: rotateY(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="ct">
+    <div class="cube">
+      <div class="box top"><img src="img/11.jpg" alt=""></div>
+      <div class="box bottom"><img src="img/12.jpg" alt=""></div>
+      <div class="box left"><img src="img/13.jpg" alt=""></div>
+      <div class="box right"><img src="img/14.jpg" alt=""></div>
+      <div class="box front"><img src="img/15.jpg" alt=""></div>
+      <div class="box behind"><img src="img/16.jpg" alt=""></div>
+    </div>
+  </div>
+</body>
+</html>

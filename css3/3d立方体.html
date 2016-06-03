@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>3D旋转</title>
+  <style>
+    html{
+      background-color: #ccc;
+    }
+    .ct{
+      margin: 300px auto 0 auto;
+      width: 200px;
+      height: 200px;
+      position: relative;
+      perspective: 1200px;
+    }
+    .cube{
+      position: absolute;
+      transform-style: preserve-3d;
+      animation: spin 10s infinite;
+    }
+    .box{
+      position: absolute;
+      backface-visibility: hidden;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #333;
+    }
+    .top{
+      transform: rotateX(-90deg) translateZ(100px);
+    }
+    .bottom{
+      transform: rotateX(90deg) translateZ(100px);
+    }
+    .left{
+      transform: rotateY(90deg) translateZ(100px);
+    }
+    .right{
+      transform: rotateY(-90deg) translateZ(100px);
+    }
+    .front{
+      transform: translateZ(100px);
+    }
+    .behind{
+      transform: rotateY(180deg) translateZ(100px);    }
+    @keyframes spin {
+      from { transform: rotateY(0) rotateX(0); }
+      to { transform: rotateY(360deg) rotateX(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="ct">
+    <div class="cube">
+      <div class="box top"><img src="img/1.jpg" alt=""></div>
+      <div class="box bottom"><img src="img/2.jpg" alt=""></div>
+      <div class="box left"><img src="img/3.jpg" alt=""></div>
+      <div class="box right"><img src="img/4.jpg" alt=""></div>
+      <div class="box front"><img src="img/5.jpg" alt=""></div>
+      <div class="box behind"><img src="img/6.jpg" alt=""></div>
+    </div>
+  </div>
+</body>
+</html>
