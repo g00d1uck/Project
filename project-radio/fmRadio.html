@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>fm</title>
+  <link rel="stylesheet" href="css/fontello.css">
+  <style>
+    ul,li,p,h3{
+      margin: 0;
+      padding: 0;
+    }
+    .ct{
+      position: absolute;
+      left: -231px;
+      width: 534px;
+    }
+    span{
+      cursor: pointer;
+    }
+    .clear-float:after{
+      content: '';
+      display: block;
+      clear: both;
+    }
+    #music-tip{
+      position: absolute;
+      top: 30px;
+      right: 50%;
+    }
+    #music-tip .icon-music{          /* 小图标样式 */
+      padding: 6px 2px 6px 0;
+      color: #fff;
+      border: 1px solid #fff;
+      background-color: #252a2f;
+      font-size: 26px;
+    }
+    .screen{
+      display: none;
+      position: absolute;
+      overflow: hidden;
+      right: 3px;
+      top: 34px;
+      width: 300px;
+      height: 365px;
+      border: 1px solid #ccc;
+    }
+    #interface{          /* 主界面样式 */
+      float: left;
+      width: 300px;
+      height: 365px;
+    }
+    #interface .stripe{
+      height: 5px;
+      width: 300px;
+      background-size: 30px 30px;
+      box-shadow: 1px 1px 8px gray;
+      background-color: #666;
+      background-image: linear-gradient(-45deg, 
+        rgba(255, 255, 255, 1) 25%, transparent 25%,
+        transparent 50%, rgba(255, 255, 255, 1) 50%, 
+        rgba(255, 255, 255, 1) 75%,transparent 75%, transparent);
+    }
+    #interface .head{      /* 主界面头部 */
+      font-size: 26px;
+      padding: 5px;
+      border-bottom: 1px solid #ccc;
+      color: #fff;
+    }
+    #interface .radio-info{
+      display: none;
+      position: absolute;
+      left: 210px;
+      top: 42px;
+      text-align: center;
+      font-size: 12px;
+      line-height: 18px;
+      color: #000;
+    }
+    #interface div.song-cover{
+      position: absolute;
+      width: 300px;
+      height: 360px;
+      background-size: contain;
+      opacity: 0.3;
+    }
+    #interface .head .icon-th-list{
+      float: left;
+    }
+    #interface .head .icon-attention-alt{
+      float: right;
+    }
+    #interface .main{       /* 主界面中间区块 */
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+      border-bottom: 1px solid #ccc;
+    }
+    #interface .interface-wrap{
+      position: absolute;
+      zoom: 1;
+      width: 300px;
+      background: linear-gradient(-45deg,rgba(220,161,83,.5),
+        rgba(217,157,97,.5)25%,rgba(217,157,97,.5)25%,
+        rgba(155,139,100,.5)40%,rgba(155,139,100,.5)40%,
+        rgba(35,44,73,.5)75%,rgba(35,44,73,.5)75%,
+        rgba(11,10,43,.5));
+    }
+    #interface .main .play{
+      margin-bottom: 50px;
+      font-size: 80px;
+    }
+    #interface .main .play:before{
+      cursor: pointer;
+    }
+    #interface .main .main-icon{
+      font-size: 20px;
+    }
+    #interface .main .song-name{
+      width: 260px;
+      height: 38px;
+      overflow: hidden;
+    }
+    #interface .footer{    /* 主界面底部 */
+      padding: 5px 10px 5px 0;
+      text-align: center;
+    }
+    #interface .footer .switch:before{
+      margin-left: -1px;
+      margin-top: -5px;
+    }
+    #interface .footer span{
+      float: right;
+      margin-top: 4px;
+      width: 25px;
+      height: 14px;
+      line-height: 14px;
+      border-radius: 8px;
+      color: #6c9;
+      font-size: 24px;
+      background-color: #eee;
+    }
+    #interface .footer p{
+      margin: 0;
+      width: 235px;
+      height: 23px;
+      overflow: hidden;
+      padding-left: 28px;
+      line-height: 23px;
+      font-size: 14px;
+      opacity: 0.6;
+    }
+    #side{                 /* 侧边栏样式 */
+      float: left;
+      width: 230px;
+      height: 365px;
+      font-size: 14px;
+      border-right: 1px solid #ccc;
+    }
+    #side .nav{              /* 侧边栏 顶部 */
+      padding: 15px 0;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+      background-color: #f0f0f0;
+    }
+    #side .nav span{
+      padding: 5px 20px;
+      border: 1px solid #ccc;
+      border-right: hidden;
+      background-color: #fff;
+    }
+    #side .nav .select{
+      color: #fff;
+      background-color: #8e8e8e;
+    }
+    #side .nav .span-right{
+      border-right: 1px solid #ccc;
+      border-radius: 0 8px 8px 0;
+    }
+    #side .nav .span-left{
+      border-radius: 8px 0 0 8px;
+    }
+    #side .channel{       /* 侧边栏 频道选择 */
+      height: 318px;
+      overflow: scroll;
+    }
+    #side .channel .icon-ok-circled:before{
+      color: #0c9;
+    }
+    #side .channel li{
+      padding: 10px 30px;
+      cursor: pointer;
+      list-style: none;
+    }
+    #side .channel li:hover{
+      color: #fff;
+      background-color: #6c9;
+    }
+    #side .channel::-webkit-scrollbar { /* 设置滚动条的样式 */
+      width: 5px;
+      height: 5px;
+    }
+    #side .channel::-webkit-scrollbar-track { /* 滚动槽 */
+      border-radius: 20px;
+      box-shadow: inset 0 0 6px #f0f0f0;
+    }
+    #side .channel::-webkit-scrollbar-thumb { /* 滚动条滑块 */
+      border-radius: 10px;
+      background: #959595; 
+    }
+  </style>
+</head>
+<body>
+  <div id="music-tip">
+    <span class="icon-music"></span>
+    <div class="screen">
+      <div class="ct clear-float">
+        <div id="side">
+          <div class="nav">
+            <span class="span-left select">热门</span><span>收藏</span><span class="span-right">广播</span>
+          </div>
+          <ul class="channel">
+          </ul>
+        </div>  
+        <div id="interface">
+          <div class="stripe"></div>
+          <div class="song-cover"></div>
+          <div class="interface-wrap">
+            <div class="head clear-float">
+              <span class="icon-th-list"></span>
+              <span class="icon-attention-alt"></span>
+              <div class="radio-info">
+                <h3>Web Radio</h3>
+                <p>当前版本：V1.0</p>
+                <p>By 柯良勇</p>
+              </div>
+            </div>
+            <div class="main">
+              <h1 class="song-name">歌名</h1>
+              <div class="play icon-play-circled2"><audio id="player" src=""></audio></div>
+              <div class="main-icon">
+                <span class="icon-heart-empty"></span>
+                <span class="icon-thumbs-down"></span>
+                <span class="icon-forward"></span>
+                <span class="icon-user"></span>
+                <span class="icon-volume-up"></span>
+                <span class="icon-upload"></span>
+                <span class="icon-th-thumb-empty"></span>
+              </div>
+            </div>
+            <div class="footer clear-float">
+              <span class="icon-toggle-off switch"></span>
+              <p class="song-artist">歌名及演唱者</p>
+            </div>
+          </div>
+        </div> 
+      </div>  
+    </div>
+  </div>
+  <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>
+    function MusicPlug(){
+      this.sideStatus=false;
+      this.radioInfo=false;
+      this.showInterface=false;
+      this.lyric=false;
+      this.playing=false;
+      this.curChannel_id=0;
+      this.curSong_id=0;
+      this.channel_data=["华语","欧美","七零","八零","九零","粤语","摇滚","民谣","轻音乐","原声","爵士","电子","说唱","R&B ","日语","韩语","女声","法语","古典","动漫","咖啡馆","圣诞","豆瓣好歌曲","世界音乐","布鲁斯","新歌","雷鬼","世界杯","小清新","Easy ","91.1 ","Pop","拉丁",];
+      this.appendChannel(this.channel_data);
+      this.bind();
+      this.defaultSet();
+      this.songSearch(this.channel_data[this.curChannel_id]);
+      
+    };
+
+    MusicPlug.prototype={
+
+      defaultSet: function(){
+        $('.channel li').eq(0).addClass('icon-ok-circled');  // 默认选择第一个频道
+      },
+
+      bind: function(){ 
+
+        var _this=this; 
+
+        $('.icon-music').on('click',function(){ //点击乐符 隐藏/显示界面
+          if(_this.showInterface){
+            $('.screen').hide('400');
+            _this.showInterface=false;
+          }else{
+            $('.screen').show('400');
+            _this.showInterface=true;
+          }
+        });
+
+        $('.icon-attention-alt').on('click',function(){ // 点击!号 显示软件信息
+          console.log(1);
+          if(_this.radioInfo){
+            $('.radio-info').fadeIn();
+            _this.radioInfo=false;
+          }else{
+            $('.radio-info').fadeOut();
+            _this.radioInfo=true;
+          };
+        });
+
+        $('.icon-th-list').on('click',function(){  //   点击  显示/隐藏侧边栏
+          if(_this.sideStatus){
+            $('.ct').animate({left:'-231px'}, 400);
+            _this.sideStatus=false;
+          }else{
+            $('.ct').animate({left:'0'}, 400);
+            _this.sideStatus=true;
+          } 
+        });
+
+        $('.channel').on('click','li',function(){           // 点击 选择电台频道 
+          $('.channel li').removeClass('icon-ok-circled'); 
+          $(this).addClass('icon-ok-circled');             // 增加打勾标记
+          _this.curChannel_id=$(this).attr('channel_id');   // 传递选中的频道ID
+          _this.songSearch(_this.channel_data[_this.curChannel_id]);
+          $('.ct').animate({left:'-231px'}, 500);          // 侧边栏归位
+          _this.sideStatus=false;
+        });
+
+
+        $('.switch').on('click',function(){              // 点击 开/关歌词
+          if(_this.lyric){
+            $(this).removeClass('icon-toggle-on');
+            $(this).addClass('icon-toggle-off');
+            _this.lyric=false;
+          }else{
+            $(this).removeClass('icon-toggle-off');
+            $(this).addClass('icon-toggle-on');
+            _this.lyric=true;
+          };
+        });
+
+        $('.play').on('click',function(){           // 点击  播放/暂停
+          if(_this.playing){
+            _this.stopPlay();
+          }else{
+            _this.startPlay();
+          };
+        });
+
+        $('.icon-forward').on('click',function(){  //  点击  下一首 
+          _this.curSong_id++;
+          _this.changeSong(_this.curSong_id);
+        })
+
+      },
+
+      startPlay:function(){
+        $('#player')[0].play();
+        $('.play').removeClass('icon-play-circled2');
+        $('.play').addClass('icon-pause-circled');
+        this.playing=true;
+      },
+
+      stopPlay:function(){
+        $('#player')[0].pause();
+        $('.play').removeClass('icon-pause-circled');
+        $('.play').addClass('icon-play-circled2');
+        this.playing=false;
+      },
+
+      appendChannel: function(channel_data){
+        var html='';
+        for(var i=0;i<channel_data.length;i++){
+          html += '<li'+' channel_id='+i+'>'+channel_data[i]+' MHz'+'</li>';
+        };
+        $('#side .channel').append($(html));
+      },
+
+      songSearch: function(name){
+        var _this=this;
+        $.ajax({
+          url: 'http://s.music.163.com/search/get/',
+          type: 'GET',
+          dataType: 'jsonp',
+          jsonp: 'callback',
+          data: {
+            'type': 1,
+            's': name,
+            'limit': 10
+          }
+        })
+        .done(function(ret){
+          _this.songData=ret.result.songs;
+          _this.changeSong(0);
+        })
+        .fail(function() {
+          console.log("get song fail");
+        });
+      },
+
+      changeSong: function(number){
+        $('#player').attr('src', this.songData[number].audio);
+        $('.song-name').text(this.songData[number].name);
+        $('.song-artist').text(this.songData[number].name+' by '+this.songData[number].artists[0].name);
+        $('.song-cover').css('background-image', 'url('+this.songData[number].album.picUrl+')');
+        this.stopPlay();
+      },
+
+    };
+    var music=new MusicPlug();
+  </script>
+</body>
+</html>
