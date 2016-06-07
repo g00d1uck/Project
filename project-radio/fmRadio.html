@@ -25,7 +25,7 @@
     #music-tip{
       position: absolute;
       top: 30px;
-      right: 50%;
+      left: 1300px;
     }
     #music-tip .icon-music{          /* 小图标样式 */
       padding: 6px 2px 6px 0;
@@ -43,6 +43,9 @@
       width: 300px;
       height: 365px;
       border: 1px solid #ccc;
+    }
+    div.drag-sign{
+      cursor: move;
     }
     #interface{          /* 主界面样式 */
       float: left;
@@ -107,10 +110,13 @@
         rgba(11,10,43,.5));
     }
     #interface .main .play{
+      width: 80px;
+      margin-left: 90px;
       margin-bottom: 50px;
       font-size: 80px;
     }
     #interface .main .play:before{
+      margin: 0;
       cursor: pointer;
     }
     #interface .main .main-icon{
@@ -130,7 +136,7 @@
       position: absolute;
       top: 1px;
       left: 1px;
-      width: 1px;
+      width: 0;
       height: 4px;
       background-color: #fff;
       border-radius: 5px;
@@ -221,7 +227,7 @@
       background-color: #f0f0f0;
     }
     #side .nav span{
-      padding: 5px 20px;
+      padding: 5px 13px;
       border: 1px solid #ccc;
       border-right: hidden;
       background-color: #fff;
@@ -236,6 +242,12 @@
     }
     #side .nav .span-left{
       border-radius: 8px 0 0 8px;
+    }
+    #side .song-random{
+      text-align: center;
+    }
+    #side .song-random li{
+      margin: 10px;
     }
     #side .channel{       /* 侧边栏 频道选择 */
       height: 318px;
@@ -274,10 +286,14 @@
       <div class="ct clear-float">
         <div id="side">
           <div class="nav">
-            <span class="span-left select">热门</span><span>收藏</span><span class="span-right">广播</span>
+            <span class="span-left select">网易云</span><span class="douban">豆瓣随机</span><span class="span-right">搜索</span>
           </div>
-          <ul class="channel">
+          <ul class="channel"></ul>
+          <ul class="song-random">
+            <li>豆瓣随机音乐</li>
+            <li>大部分是轻音乐</li>
           </ul>
+          <ul class="search"></ul>
         </div>  
         <div id="interface">
           <div class="stripe"></div>
@@ -288,7 +304,8 @@
               <span class="icon-attention-alt"></span>
               <div class="radio-info">
                 <h3>Web Radio</h3>
-                <p>当前版本：V1.0</p>
+                <p>当前版本：V2.0</p>
+                <p>增加豆瓣随机</p>
                 <p>By 柯良勇</p>
               </div>
             </div>
@@ -333,11 +350,14 @@
       this.curChannel_id=0;
       this.curSong_id=0;
       this.volume=1.0;
+      this.draging=false;
+      this.doubanOn=false;
       this.channel_data=["华语","欧美","七零","八零","九零","粤语","摇滚","民谣","轻音乐","原声","爵士","电子","说唱","R&B ","日语歌曲","韩语歌曲","女声","法语","古典","动漫","咖啡馆","圣诞","世界音乐","布鲁斯","新歌","雷鬼","世界杯","小清新","Easy ","91.1 ","Pop","拉丁",];
       this.appendChannel(this.channel_data);
       this.bind();
       this.defaultSet();
       this.songSearch(this.channel_data[this.curChannel_id]);
+      this.drag($('#music-tip'));
       this.setTime();
     };
 
@@ -358,7 +378,7 @@
           }else{
             $('.screen').show('400');
             _this.showInterface=true;
-          }
+          };
         });
 
         $('.icon-attention-alt').on('click',function(){ // 点击!号 显示软件信息
@@ -381,6 +401,28 @@
           } 
         });
 
+        $('.nav').on('click','span',function(){    //  点击 侧边栏 选择网易、豆瓣、搜索
+          $('.nav span').removeClass('select');
+          $(this).addClass('select');
+          $('.channel').hide();
+          $('.song-random').hide();
+          $('.search').hide();
+          if(this.innerText===$('.span-left').text()){
+            $('.channel').show();
+          };
+          if(this.innerText===$('.douban').text()){
+            $('.song-random').show();
+            if(!_this.doubanOn)_this.getDouBanSong();
+            $('.ct').animate({left:'-231px'}, 500);          // 侧边栏归位
+            _this.sideStatus=false;
+            $('.channel li').removeClass('icon-ok-circled'); 
+            _this.doubanOn=true;
+          };
+          if(this.innerText===$('.span-right').text()){
+            $('.search').show();
+          };
+        });
+
         $('.channel').on('click','li',function(){           // 点击 选择电台频道 
           $('.channel li').removeClass('icon-ok-circled'); 
           $(this).addClass('icon-ok-circled');             // 增加打勾标记
@@ -388,8 +430,8 @@
           _this.songSearch(_this.channel_data[_this.curChannel_id]);
           $('.ct').animate({left:'-231px'}, 500);          // 侧边栏归位
           _this.sideStatus=false;
+          _this.doubanOn=false;
         });
-
 
         $('.switch').on('click',function(){              // 点击 开/关歌词
           if(_this.lyric){
@@ -412,11 +454,15 @@
         });
 
         $('.icon-forward').on('click',function(){  //  点击  下一首 
-          _this.curSong_id++;
-          _this.changeSong(_this.curSong_id);
+          if(_this.doubanOn){
+            _this.getDouBanSong();
+          }else{
+            _this.curSong_id++;
+            _this.changeSong(_this.curSong_id);
+          };
         });
 
-        $('.triangle').on('click',function(){ // 点击 静音
+        $('.triangle').on('click',function(){       // 点击 静音
           if($('#player')[0].volume === 0.0){
             $('#player')[0].volume=_this.volume;
             _this.volumeOn();
@@ -460,10 +506,14 @@
         this.playing=true;
       },
 
-      judgeNex: function(){
+      judgeNex: function(){                      // 判断是否 播放下一首
         if($('#player')[0].currentTime >= $('#player')[0].duration){
-          this.curSong_id++;
-          this.changeSong(this.curSong_id);
+          if(this.doubanOn){
+            this.getDouBanSong();
+          }else{
+            this.curSong_id++;
+            this.changeSong(this.curSong_id);
+          };
         };
       },
 
@@ -484,7 +534,7 @@
         $('.volume').addClass('icon-volume-high');
       },
 
-      setTime: function(){
+      setTime: function(){                       // 定时更新播放条
         var _this=this;
         var clock=setInterval(function(){
           var time=$('#player')[0].currentTime/$('#player')[0].duration;
@@ -531,6 +581,65 @@
         $('.song-artist').text(this.songData[number].name+' by '+this.songData[number].artists[0].name);
         $('.song-cover').css('background-image', 'url('+this.songData[number].album.picUrl+')');
         this.startPlay();
+      },
+
+      getDouBanSong: function(){
+
+        var _this=this;
+
+        $.ajax({
+          url: 'http://api.jirengu.com/fm/getSong.php',
+          type: 'GET',
+          dataType: 'json',
+        })
+        .done(function(ret){
+          $('#player').attr('src', ret.song[0].url);
+          $('.song-name').text(ret.song[0].title);
+          $('.song-artist').text(ret.song[0].title+'by'+ret.song[0].artist);
+          $('.song-cover').css('background-image', 'url('+ret.song[0].picture+')');
+          _this.startPlay();
+          $.ajax({
+            url: 'http://api.jirengu.com/fm/getLyric.php',
+            type: 'post',
+            dataType: 'json',
+            data:{
+              ssid:ret.song[0].ssid,
+              sid:ret.song[0].sid,
+            }
+          })
+          .done(function(ret){
+            _this.lyric=ret.lyric;
+          })
+          .fail(function() {
+            alert("get douban lyric error");
+          });
+
+        })
+        .fail(function() {
+          alert("get douban song error");
+        });
+      },
+
+      drag:function($node){                        //  给定节点 实现拖拽
+        var _this=this;
+        $node.on('mousedown',function(e){
+          $node.addClass('drag-sign');
+          _this.left=e.pageX-$node.offset().left;
+          _this.top=e.pageY-$node.offset().top;
+          _this.draging=true;
+        });
+        $node.on('mouseup',function(){
+          _this.draging=false;
+          $node.removeClass('drag-sign');
+        });
+        $(window).on('mousemove',function(e){
+          if(_this.draging){
+            $node.css({
+              left: +e.pageX-_this.left,
+              top: e.pageY-_this.top
+            });
+          };
+        });
       },
 
     };
