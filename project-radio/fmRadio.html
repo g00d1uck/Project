@@ -572,6 +572,7 @@
         })
         .done(function(ret){
           _this.songData=ret.result.songs;
+          $('#player').css('type', 'video/mp3');
           _this.changeSong(0);
         })
         .fail(function() {
@@ -597,6 +598,7 @@
           dataType: 'json',
         })
         .done(function(ret){
+          $('#player').css('type', 'video/mp4');
           $('#player').attr('src', ret.song[0].url);
           $('.song-name').text(ret.song[0].title);
           $('.song-artist').text(ret.song[0].title+' by '+ret.song[0].artist);
