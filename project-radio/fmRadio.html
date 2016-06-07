@@ -80,7 +80,8 @@
       position: absolute;
       width: 300px;
       height: 360px;
-      background-size: contain;
+      background-size: cover;
+      background-repeat: no-repeat;
       opacity: 0.3;
     }
     #interface .head .icon-th-list{
@@ -90,7 +91,7 @@
       float: right;
     }
     #interface .main{       /* 主界面中间区块 */
-      padding: 20px;
+      padding: 20px 20px 10px 20px;
       text-align: center;
       color: #fff;
       border-bottom: 1px solid #ccc;
@@ -113,12 +114,69 @@
       cursor: pointer;
     }
     #interface .main .main-icon{
+      position: relative;
       font-size: 20px;
+    }
+    #interface .main .time-outline{
+      position: relative;
+      width: 250px;
+      height: 6px;
+      margin: 13px 0 8px 4px;
+      background-color: transparent;
+      border: 1px solid #eee;
+      border-radius: 5px;
+    }
+    #interface .main .time{
+      position: absolute;
+      top: 1px;
+      left: 1px;
+      width: 1px;
+      height: 4px;
+      background-color: #fff;
+      border-radius: 5px;
+    }
+    #interface .main .main-icon .volume-adj{
+      display: none;
+      position: absolute;
+      top: -21px;
+      left: 107px;
+      width: 120px;
+      height: 14px;
+      background-color: #fff;
+      border-radius: 10px;
+    }
+    #interface .main .main-icon .triangle{
+      position: absolute;
+      top: 12px;
+      left: 44px;
+      border-width: 10px 17px 21px 17px;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent ;
+    }
+    #interface .main .main-icon .volume-light{
+      position: absolute;
+      top: 5px;
+      left: 11px;
+      width: 98px;
+      height: 4px;
+      background-color: #6c9;
+      border-radius: 5px;
+    }
+    #interface .main .main-icon .volume-outline{
+      position: absolute;
+      top: 4px;
+      left: 10px;
+      width: 98px;
+      height: 4px;
+      border: 1px solid #ccc;
+      background-color: transparent;
+      border-radius: 5px;
     }
     #interface .main .song-name{
       width: 260px;
       height: 38px;
       overflow: hidden;
+      margin: 10px 0 15px 0;
     }
     #interface .footer{    /* 主界面底部 */
       padding: 5px 10px 5px 0;
@@ -236,15 +294,23 @@
             </div>
             <div class="main">
               <h1 class="song-name">歌名</h1>
-              <div class="play icon-play-circled2"><audio id="player" src=""></audio></div>
+              <div class="play "><audio id="player" src="">您的浏览器不支持音频</audio></div>
               <div class="main-icon">
                 <span class="icon-heart-empty"></span>
                 <span class="icon-thumbs-down"></span>
                 <span class="icon-forward"></span>
                 <span class="icon-user"></span>
-                <span class="icon-volume-up"></span>
+                <span class="icon-volume-high volume"></span>
+                <span class="volume-adj">
+                  <span class="triangle"></span>
+                  <span class="volume-light"></span>
+                  <span class="volume-outline"></span>
+                </span>
                 <span class="icon-upload"></span>
                 <span class="icon-th-thumb-empty"></span>
+              </div>
+              <div class="time-outline">
+                <div class="time"></div>
               </div>
             </div>
             <div class="footer clear-float">
@@ -266,12 +332,13 @@
       this.playing=false;
       this.curChannel_id=0;
       this.curSong_id=0;
-      this.channel_data=["华语","欧美","七零","八零","九零","粤语","摇滚","民谣","轻音乐","原声","爵士","电子","说唱","R&B ","日语","韩语","女声","法语","古典","动漫","咖啡馆","圣诞","豆瓣好歌曲","世界音乐","布鲁斯","新歌","雷鬼","世界杯","小清新","Easy ","91.1 ","Pop","拉丁",];
+      this.volume=1.0;
+      this.channel_data=["华语","欧美","七零","八零","九零","粤语","摇滚","民谣","轻音乐","原声","爵士","电子","说唱","R&B ","日语歌曲","韩语歌曲","女声","法语","古典","动漫","咖啡馆","圣诞","世界音乐","布鲁斯","新歌","雷鬼","世界杯","小清新","Easy ","91.1 ","Pop","拉丁",];
       this.appendChannel(this.channel_data);
       this.bind();
       this.defaultSet();
       this.songSearch(this.channel_data[this.curChannel_id]);
-      
+      this.setTime();
     };
 
     MusicPlug.prototype={
@@ -295,12 +362,11 @@
         });
 
         $('.icon-attention-alt').on('click',function(){ // 点击!号 显示软件信息
-          console.log(1);
           if(_this.radioInfo){
-            $('.radio-info').fadeIn();
+            $('.radio-info').fadeOut();
             _this.radioInfo=false;
           }else{
-            $('.radio-info').fadeOut();
+            $('.radio-info').fadeIn();
             _this.radioInfo=true;
           };
         });
@@ -348,25 +414,88 @@
         $('.icon-forward').on('click',function(){  //  点击  下一首 
           _this.curSong_id++;
           _this.changeSong(_this.curSong_id);
-        })
+        });
+
+        $('.triangle').on('click',function(){ // 点击 静音
+          if($('#player')[0].volume === 0.0){
+            $('#player')[0].volume=_this.volume;
+            _this.volumeOn();
+          }else{
+            $('#player')[0].volume = 0.0;
+            _this.volumeOff();
+          } 
+        });
+
+        $('.volume').on('mouseover',function(){  //     鼠标进入 显示音量
+          $('.volume-adj').show();
+        });
+
+        $('.volume-adj').on('mouseleave',function(){ //  鼠标移开 隐藏音量
+          $('.volume-adj').hide();
+        });
+
+        $('.volume-outline').on('click',function(e){  //  点击 调节音量
+          _this.volume=(e.pageX-$(this).offset().left)/100;
+          $('#player')[0].volume=_this.volume;
+          if(_this.volume === 0){
+            _this.volumeOff();
+          };
+          $('.volume-light').css('width', _this.volume*100);
+          console.log(_this.volume);
+        });
+
+        $('.time-outline').on('click',function(e){  //  点击 调节播放进度
+          _this.currentTime=((e.pageX-$(this).offset().left)/250)*$('#player')[0].duration;
+          $('#player')[0].currentTime=_this.currentTime;
+          _this.judgeNex();
+          $('.time').css('width', e.pageX-$(this).offset().left);
+        });
 
       },
 
-      startPlay:function(){
+      startPlay: function(){                       // 开始播放
         $('#player')[0].play();
         $('.play').removeClass('icon-play-circled2');
         $('.play').addClass('icon-pause-circled');
         this.playing=true;
       },
 
-      stopPlay:function(){
+      judgeNex: function(){
+        if($('#player')[0].currentTime >= $('#player')[0].duration){
+          this.curSong_id++;
+          this.changeSong(this.curSong_id);
+        };
+      },
+
+      stopPlay: function(){                       // 停止播放
         $('#player')[0].pause();
         $('.play').removeClass('icon-pause-circled');
         $('.play').addClass('icon-play-circled2');
         this.playing=false;
       },
 
-      appendChannel: function(channel_data){
+      volumeOff: function(){                        // 静音
+        $('.volume').removeClass('icon-volume-high');
+        $('.volume').addClass('icon-volume-off');
+      },
+
+      volumeOn: function(){                       //  开启声音
+        $('.volume').removeClass('icon-volume-off');
+        $('.volume').addClass('icon-volume-high');
+      },
+
+      setTime: function(){
+        var _this=this;
+        var clock=setInterval(function(){
+          var time=$('#player')[0].currentTime/$('#player')[0].duration;
+          if(time>=1){
+            $('.time').css('width', '0');
+          }else $('.time').css('width', 248*time);
+          _this.judgeNex();
+        },1000);
+      },
+
+      appendChannel: function(channel_data){      // 读取频道信息 并放到side侧边栏
         var html='';
         for(var i=0;i<channel_data.length;i++){
           html += '<li'+' channel_id='+i+'>'+channel_data[i]+' MHz'+'</li>';
@@ -374,8 +503,8 @@
         $('#side .channel').append($(html));
       },
 
-      songSearch: function(name){
-        var _this=this;
+      songSearch: function(name){             //  获取歌曲数据 此处使用网易搜索API 
+        var _this=this;                       //  以电台名进行搜索 模拟电台效果
         $.ajax({
           url: 'http://s.music.163.com/search/get/',
           type: 'GET',
@@ -384,7 +513,7 @@
           data: {
             'type': 1,
             's': name,
-            'limit': 10
+            'limit': 50
           }
         })
         .done(function(ret){
@@ -396,12 +525,12 @@
         });
       },
 
-      changeSong: function(number){
+      changeSong: function(number){                   //  更换歌曲 下一首或新频道
         $('#player').attr('src', this.songData[number].audio);
         $('.song-name').text(this.songData[number].name);
         $('.song-artist').text(this.songData[number].name+' by '+this.songData[number].artists[0].name);
         $('.song-cover').css('background-image', 'url('+this.songData[number].album.picUrl+')');
-        this.stopPlay();
+        this.startPlay();
       },
 
     };
