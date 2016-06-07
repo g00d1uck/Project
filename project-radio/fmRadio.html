@@ -595,7 +595,7 @@
         .done(function(ret){
           $('#player').attr('src', ret.song[0].url);
           $('.song-name').text(ret.song[0].title);
-          $('.song-artist').text(ret.song[0].title+'by'+ret.song[0].artist);
+          $('.song-artist').text(ret.song[0].title+' by '+ret.song[0].artist);
           $('.song-cover').css('background-image', 'url('+ret.song[0].picture+')');
           _this.startPlay();
           $.ajax({
