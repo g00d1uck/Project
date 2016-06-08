@@ -358,6 +358,7 @@
       this.showInterface=false;
       this.lyric=false;
       this.playing=false;
+      this.looping=false;
       this.curChannel_id=0;
       this.curSong_id=0;
       this.volume=1.0;
@@ -514,7 +515,17 @@
           $('.time').css('width', e.pageX-$(this).offset().left);
         });
 
-        $('.icon-loop-alt').on('click',function)
+        $('.icon-loop-alt').on('click',function(){  // 点击 增/减 单曲循环状态
+          if(_this.looping){
+            $('#player').removeAttr('loop');
+            $(this).css('color', '#fff');
+            _this.looping=false;
+          }else{
+            $('#player').attr('loop','');
+            $(this).css('color', '#6c9');
+            _this.looping=true;
+          } 
+        });
 
       },
 
@@ -527,6 +538,7 @@
 
       judgeNex: function(){                      // 判断是否 播放下一首
         if($('#player')[0].currentTime >= $('#player')[0].duration){
+          if(!this.looping)return;
           if(this.doubanOn){
             this.getDouBanSong();
           }else{
