@@ -1,0 +1,324 @@
+#music-tip ul,
+#music-tip li,
+#music-tip p,
+#music-tip h3{
+  margin: 0;
+  padding: 0;
+}
+#music-tip .ct{
+  position: absolute;
+  left: -231px;
+  width: 534px;
+}
+#music-tip span{
+  cursor: pointer;
+}
+#music-tip .clear-float:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+#music-tip{
+  position: absolute;
+  top: 30px;
+  left: 1300px;
+}
+#music-tip .icon-music{          /* 小图标样式 */
+  position: absolute;
+  padding: 6px 6px 6px 0;
+  color: #7ebae6;
+  border: 1px solid #7ebae6;
+  font-size: 26px;
+  border-radius: 25px;
+}
+#music-tip .screen{
+  display: none;
+  position: absolute;
+  overflow: hidden;
+  right: 3px;
+  top: 34px;
+  width: 300px;
+  height: 365px;
+  border: 1px solid #ccc;
+}
+#music-tip div.drag-sign{
+  cursor: move;
+}
+#music-tip #interface{          /* 主界面样式 */
+  float: left;
+  width: 300px;
+  height: 365px;
+}
+#music-tip #interface .stripe{
+  height: 5px;
+  width: 300px;
+  background-size: 30px 30px;
+  box-shadow: 1px 1px 8px gray;
+  background-color: #666;
+  background-image: linear-gradient(-45deg, 
+    rgba(255, 255, 255, 1) 25%, transparent 25%,
+    transparent 50%, rgba(255, 255, 255, 1) 50%, 
+    rgba(255, 255, 255, 1) 75%,transparent 75%, transparent);
+}
+#music-tip #interface .head{      /* 主界面头部 */
+  font-size: 26px;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  color: #fff;
+}
+#music-tip #interface .radio-info{
+  display: none;
+  position: absolute;
+  left: 210px;
+  top: 42px;
+  text-align: center;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000;
+}
+#music-tip #interface div.song-cover{
+  position: absolute;
+  width: 300px;
+  height: 360px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0.3;
+}
+#music-tip #interface .head .icon-th-list{
+  float: left;
+}
+#music-tip #interface .head .icon-attention-alt{
+  float: right;
+}
+#music-tip #interface .main{       /* 主界面中间区块 */
+  position: relative;
+  padding: 10px 20px;
+  text-align: center;
+  color: #fff;
+  border-bottom: 1px solid #ccc;
+}
+#music-tip #interface .main span:before{
+  margin: 0 7px;
+}
+#music-tip #interface .interface-wrap{
+  position: absolute;
+  zoom: 1;
+  width: 300px;
+  background: linear-gradient(-45deg,rgba(220,161,83,.5),
+    rgba(217,157,97,.5)25%,rgba(217,157,97,.5)25%,
+    rgba(155,139,100,.5)40%,rgba(155,139,100,.5)40%,
+    rgba(35,44,73,.5)75%,rgba(35,44,73,.5)75%,
+    rgba(11,10,43,.5));
+}
+#music-tip #interface .main .play{
+  width: 80px;
+  height: 91px;
+  margin-left: 90px;
+  margin-bottom: 2px;
+  font-size: 80px;
+}
+#music-tip iframe{
+  width: 0;
+  height: 0;
+}
+#music-tip #interface .main .play:before{
+  margin: 0;
+  cursor: pointer;
+}
+#music-tip #interface .main .main-icon{
+  position: relative;
+  font-size: 20px;
+}
+#music-tip #interface .main .time-outline{
+  position: relative;
+  width: 200px;
+  height: 4px;
+  margin: 13px 0 4px 30px;
+  background-color: #8c8f8b;
+  cursor: pointer;
+}
+#music-tip #interface .main .time{
+  position: absolute;
+  height: 4px;
+  background-color: #fff;
+}
+#music-tip #interface .main .cur-time{
+  position: absolute;
+  left: 11px;
+  top: 263px;
+  font-size: 12px;
+  color: #eee;
+}
+#music-tip #interface .main .total-time{
+  position: absolute;
+  left: 260px;
+  top: 262px;
+  font-size: 12px;
+  color: #eee;
+}
+#music-tip #interface .main .main-icon .volume-adj{
+  display: none;
+  position: absolute;
+  top: -21px;
+  left: 107px;
+  width: 120px;
+  height: 14px;
+  background-color: #fff;
+}
+#music-tip #interface .main .main-icon .triangle{
+  position: absolute;
+  top: 12px;
+  left: 44px;
+  border-width: 10px 17px 21px 17px;
+  border-style: solid;
+  border-color: #fff transparent transparent transparent ;
+}
+#music-tip #interface .main .main-icon .volume-light{
+  position: absolute;
+  top: 5px;
+  left: 11px;
+  width: 98px;
+  height: 4px;
+  background-color: #6c9;
+}
+#music-tip #interface .main .main-icon .volume-outline{
+  position: absolute;
+  top: 4px;
+  left: 10px;
+  width: 98px;
+  height: 4px;
+  border: 1px solid #ccc;
+  background-color: transparent;
+  cursor: pointer;
+}
+#music-tip #interface .main .song-name{
+  width: 260px;
+  height: 38px;
+  overflow: hidden;
+  margin: 4px 0;
+}
+#music-tip #interface .main .icon-rewind-outline{
+  position: absolute;
+  top: 87px;
+  left: 56px;
+  font-size: 30px;
+}
+#music-tip #interface .main .icon-fast-fw-outline{
+  position: absolute;
+  top: 87px;
+  left: 202px;
+  font-size: 30px;
+}
+#music-tip #interface .main .lyric-place{
+  width: 260px;
+  height: 77px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+#music-tip #interface .main .lyric-list{
+  position: relative;
+}
+#music-tip #interface .main .lyric-place li{
+  margin: 7px;
+  overflow: hidden;
+  font-size: 15px;
+  opacity: 0.5; 
+}
+#music-tip #interface .main .lyric-place li.showing{
+  color: #fff;
+  opacity: 1; 
+}
+#music-tip #interface .footer{    /* 主界面底部 */
+  padding: 5px 10px 5px 0;
+  text-align: center;
+}
+#music-tip #interface .footer .switch:before{
+  margin-left: -1px;
+  margin-top: -5px;
+  cursor: pointer;
+}
+#music-tip #interface .footer span{
+  float: right;
+  margin-top: 4px;
+  width: 25px;
+  height: 14px;
+  line-height: 14px;
+  border-radius: 8px;
+  color: #6c9;
+  font-size: 24px;
+  background-color: #eee;
+}
+#music-tip #interface .footer p{
+  margin: 0;
+  width: 235px;
+  height: 23px;
+  overflow: hidden;
+  padding-left: 28px;
+  line-height: 23px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+#music-tip #side{                 /* 侧边栏样式 */
+  float: left;
+  width: 230px;
+  height: 365px;
+  font-size: 14px;
+  border-right: 1px solid #ccc;
+}
+#music-tip #side .nav{              /* 侧边栏 顶部 */
+  padding: 15px 0;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+  background-color: #f0f0f0;
+}
+#music-tip #side .nav span{
+  padding: 5px 13px;
+  border: 1px solid #ccc;
+  border-right: hidden;
+  background-color: #fff;
+}
+#music-tip #side .nav .select{
+  color: #fff;
+  background-color: #8e8e8e;
+}
+#music-tip #side .nav .span-right{
+  border-right: 1px solid #ccc;
+  border-radius: 0 8px 8px 0;
+}
+#music-tip #side .nav .span-left{
+  border-radius: 8px 0 0 8px;
+}
+#music-tip #side .song-random{
+  text-align: center;
+}
+#music-tip #side .song-random li{
+  margin: 10px;
+}
+#music-tip #side .channel{       /* 侧边栏 频道选择 */
+  height: 318px;
+  overflow: scroll;
+}
+#music-tip #side .channel .icon-ok-circled:before{
+  color: #0c9;
+}
+#music-tip #side .channel li{
+  padding: 10px 30px;
+  cursor: pointer;
+  list-style: none;
+}
+#music-tip #side .channel li:hover{
+  color: #fff;
+  background-color: #6c9;
+}
+#music-tip #side .channel::-webkit-scrollbar { /* 设置滚动条的样式 */
+  width: 5px;
+  height: 5px;
+}
+#music-tip #side .channel::-webkit-scrollbar-track { /* 滚动槽 */
+  border-radius: 20px;
+  box-shadow: inset 0 0 6px #f0f0f0;
+}
+#music-tip #side .channel::-webkit-scrollbar-thumb { /* 滚动条滑块 */
+  border-radius: 10px;
+  background: #959595; 
+}
