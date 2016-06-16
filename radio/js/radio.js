@@ -401,7 +401,6 @@
           $('#music-tip .song-cover').css('background-image', 'url('+ret.song[0].picture+')');
           _this.startPlay();
           $('#music-tip .lyric-list').text('');  
-          $('#music-tip .lyric-list').append('<li></li><li>本歌曲暂时无歌词</li>');
           _this.getingDouBan=false;
           _this.getDouBanLyric(ret.song[0].ssid, ret.song[0].sid);
         });
@@ -411,7 +410,6 @@
         var _this=this;
         $.post('http://api.jirengu.com/fm/getLyric.php', {ssid: ssid, sid: sid }, function(ret){
           var ret=JSON.parse(ret);
-          console.log(ret.lyric);
           _this.setLyric(ret.lyric);
         });
       },
@@ -448,9 +446,11 @@
         for(var i=0;i<this.timeArr.length;i++){
           lyricHtml += '<li>'+this.lyricData[this.timeArr[i]]+'</li>';
         };
-        console.log(this.timeArr);
-        $('#music-tip .lyric-list').text('');
+        console.log(lyricHtml);
         $('#music-tip .lyric-list').append(lyricHtml);
+        if(!lyricHtml){
+          $('#music-tip .lyric-list').append('本歌曲暂时无对应歌曲');
+        };
         $('#music-tip .lyric-list').css('top', 45);
         this.lyricShowing();
       },

@@ -225,8 +225,10 @@
   overflow: hidden;
   font-size: 15px;
   opacity: 0.5; 
+  transition: all 0.5s;
 }
 #music-tip #interface .main .lyric-place li.showing{
+  font-size: 19px;
   color: #fff;
   opacity: 1; 
 }
