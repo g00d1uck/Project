@@ -8,14 +8,13 @@
       this.draging=false;        // 是否可拖动
       this.doubanOn=true;       // 是否播放豆瓣的歌曲 
       this.getingDouBan=false;   // 是否正在获取豆瓣歌曲信息 ajax锁
-      this.firstPlay=true;
-      // this.channel_id=
-      this.linkCss();
-      this.appendRadioHtml();
-      this.bind();                            // 按钮点击事件的绑定
-      this.getDouBanSong();
-      this.getChannel();
-      this.drag($('#music-tip'));          // 传递拖动主节点
+      this.firstPlay=true;     // 是否首次播放，用来判断是否页面多开
+      this.linkCss();          // 引入CSS
+      this.appendRadioHtml();       // 创建Html
+      this.bind();               // 按钮点击事件的绑定
+      this.getDouBanSong();       // 获取豆瓣歌曲   
+      this.getChannel();       // 获取豆瓣电台信息
+      this.drag($('#music-tip'));   // 传递拖动主节点
     };
 
     MusicPlug.prototype={
@@ -449,8 +448,10 @@
         for(var i=0;i<this.timeArr.length;i++){
           lyricHtml += '<li>'+this.lyricData[this.timeArr[i]]+'</li>';
         };
+        console.log(this.timeArr);
         $('#music-tip .lyric-list').text('');
         $('#music-tip .lyric-list').append(lyricHtml);
+        $('#music-tip .lyric-list').css('top', 45);
         this.lyricShowing();
       },
 
@@ -458,13 +459,13 @@
         var curTime=$('#music-tip #frame').contents().find('#player')[0].currentTime;
         if(!this.timeArr)return;
         for(var i=1;i<this.timeArr.length;i++){
-          if((curTime-0.1 < this.timeArr[i])&&(curTime-0.1 > this.timeArr[i-1])){
+          if((curTime < this.timeArr[i])&&(curTime > this.timeArr[i-1])){
             var liHeight=0;
             for(var j=0;j<=i-1;j++){
               var eachHeight=$('#music-tip .lyric-list li').eq(j).outerHeight(true)-7;
               liHeight += eachHeight;
             };
-            $('#music-tip .lyric-list').animate({'top':45-liHeight}, 50);
+            $('#music-tip .lyric-list').css('top', 45-liHeight);
             $('#music-tip .lyric-list li').removeClass('showing');
             $('#music-tip .lyric-list li').eq(i-1).addClass('showing');
           };
