@@ -25,6 +25,8 @@
 }
 #music-tip .icon-music{          /* 小图标样式 */
   position: absolute;
+  right: 458px;
+  top: 61px;
   padding: 6px 6px 6px 0;
   color: #7ebae6;
   border: 1px solid #7ebae6;
@@ -32,11 +34,10 @@
   border-radius: 25px;
 }
 #music-tip .screen{
-  display: none;
   position: absolute;
   overflow: hidden;
-  right: 3px;
-  top: 34px;
+  right: 500px;
+  top: 100px;
   width: 300px;
   height: 365px;
   border: 1px solid #ccc;
@@ -217,6 +218,7 @@
 }
 #music-tip #interface .main .lyric-list{
   position: relative;
+  top: 45px;
 }
 #music-tip #interface .main .lyric-place li{
   margin: 7px;
@@ -281,18 +283,12 @@
   color: #fff;
   background-color: #8e8e8e;
 }
-#music-tip #side .nav .span-right{
+#music-tip #side .nav .wangyiyun{
   border-right: 1px solid #ccc;
   border-radius: 0 8px 8px 0;
 }
-#music-tip #side .nav .span-left{
+#music-tip #side .nav .douban{
   border-radius: 8px 0 0 8px;
-}
-#music-tip #side .song-random{
-  text-align: center;
-}
-#music-tip #side .song-random li{
-  margin: 10px;
 }
 #music-tip #side .channel{       /* 侧边栏 频道选择 */
   height: 318px;

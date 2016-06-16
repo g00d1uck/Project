@@ -1,25 +1,21 @@
 
     function MusicPlug(){
-      this.showInterface=false;  // 主页面的显示状态
+      this.showInterface=true;  // 主页面的显示状态
       this.lyric=true;           // 歌词是否显示
       this.playing=false;        // 是否在播放状态
       this.looping=false;        // 是否单曲循环
-      this.curChannel_id=0;      // 网易云默认的频道ID
-      this.curSong_id=0;         // 网易云的歌曲ID
       this.volume=1.0;           // 目前的音量
       this.draging=false;        // 是否可拖动
-      this.doubanOn=false;       // 是否播放豆瓣的歌曲 
+      this.doubanOn=true;       // 是否播放豆瓣的歌曲 
       this.getingDouBan=false;   // 是否正在获取豆瓣歌曲信息 ajax锁
       this.firstPlay=true;
-      this.channel_data=["华语","欧美","七零","八零","九零","粤语","摇滚","民谣","轻音乐","原声","爵士","电子","说唱","R&B ","日语歌曲","韩语歌曲","女声","法语","古典","动漫","咖啡馆","圣诞","世界音乐","布鲁斯","新歌","雷鬼","世界杯","小清新","Easy ","91.1 ","Pop","拉丁",];
+      // this.channel_id=
       this.linkCss();
       this.appendRadioHtml();
-      this.appendChannel(this.channel_data);  // 默认网易云 无需获取频道ID
       this.bind();                            // 按钮点击事件的绑定
-      this.defaultSet();                      // 默认选择网易云第一个频道 第一首歌
-      this.songSearch(this.channel_data[this.curChannel_id]);  // 默认网易云 去获取歌曲 
+      this.getDouBanSong();
+      this.getChannel();
       this.drag($('#music-tip'));          // 传递拖动主节点
-      this.setTime();                      // 定时函数  更新进度条及歌词滚动
     };
 
     MusicPlug.prototype={
@@ -37,15 +33,13 @@
                         +'<div class="ct clear-float">'
                           +'<div id="side">'
                             +'<div class="nav">'
-                              +'<span class="span-left select">网易云</span><span class="douban">豆瓣随机</span><span class="span-right">搜索</span>'
+                              +'<span class="douban select">豆瓣电台</span><span class="wangyiyun">网易云搜索</span>'
                             +'</div>'
-                            +'<ul class="channel"></ul>'
-                            +'<ul class="song-random">'
-                              +'<li>豆瓣随机音乐</li>'
-                              +'<li>大部分是轻音乐</li>'
+                            +'<ul class="channel">'
+                              +'<li class="icon-ok-circled">随机歌曲 MHz</li>'
                             +'</ul>'
                             +'<ul class="search"></ul>'
-                          +'</div>  '
+                          +'</div>'
                           +'<div id="interface">'
                             +'<div class="stripe"></div>'
                             +'<div class="song-cover"></div>'
@@ -55,8 +49,8 @@
                                 +'<span class="icon-attention-alt"></span>'
                                 +'<div class="radio-info">'
                                   +'<h3>Web Radio</h3>'
-                                  +'<p>当前版本：V2.0</p>'
-                                  +'<p>增加豆瓣随机</p>'
+                                  +'<p>当前版本：V3.0</p>'
+                                  +'<p>重构整理Bug</p>'
                                   +'<p>By 柯良勇</p>'
                                 +'</div>'
                               +'</div>'
@@ -100,15 +94,11 @@
         $('body').append(radioHtml);
       },
 
-      defaultSet: function(){
-        $('#music-tip .channel li').eq(0).addClass('icon-ok-circled');  // 默认选择第一个频道
-      },
-
       bind: function(){ 
 
         var _this=this; 
 
-        $('#music-tip .icon-music').on('click',function(){ //点击乐符 隐藏/显示界面
+        $('#music-tip .icon-music').on('click',function(){             //点击乐符 隐藏/显示界面
           if(_this.showInterface){
             $('#music-tip .screen').hide('400');
             _this.showInterface=false;
@@ -138,32 +128,29 @@
           $('#music-tip .nav span').removeClass('select');
           $(this).addClass('select');
           $('#music-tip .channel').hide();
-          $('#music-tip .song-random').hide();
           $('#music-tip .search').hide();
-          if(this.innerText===$('#music-tip .span-left').text()){
+          if(this.innerText===$('#music-tip .douban').text()){
             $('#music-tip .channel').show();
           };
-          if(this.innerText===$('#music-tip .douban').text()){
-            $('#music-tip .song-random').show();
-            if(!_this.doubanOn)_this.getDouBanSong();
-            $('#music-tip .ct').animate({left:'-231px'}, 500);          // 侧边栏归位
-            _this.sideStatus=false;
-            $('#music-tip .channel li').removeClass('icon-ok-circled'); 
-            _this.doubanOn=true;
-          };
-          if(this.innerText===$('#music-tip .span-right').text()){
+          // if(this.innerText===$('#music-tip .douban').text()){
+          //   $('#music-tip .song-random').show();
+          //   if(!_this.doubanOn)_this.getDouBanSong();
+          //   $('#music-tip .ct').animate({left:'-231px'}, 500);          // 侧边栏归位
+          //   _this.sideStatus=false;
+          //   $('#music-tip .channel li').removeClass('icon-ok-circled'); 
+          //   _this.doubanOn=true;
+          // };
+          if(this.innerText===$('#music-tip .wangyiyun').text()){
             $('#music-tip .search').show();
           };
         });
 
         $('#music-tip .channel').on('click','li',function(){           // 点击 选择电台频道 
           $('#music-tip .channel li').removeClass('icon-ok-circled'); 
-          $(this).addClass('icon-ok-circled');             // 增加打勾标记
-          _this.curChannel_id=$(this).attr('channel_id');   // 传递选中的频道ID
-          _this.songSearch(_this.channel_data[_this.curChannel_id]);
-          $('#music-tip .ct').animate({left:'-231px'}, 500);          // 侧边栏归位
-          _this.sideStatus=false;
-          _this.doubanOn=false;
+          $(this).addClass('icon-ok-circled');            
+          _this.getDouBanSong($(this).attr('channel_id'));  
+          $('#music-tip .ct').animate({left:'-231px'}, 500);     
+          _this.doubanOn=true;
         });
 
         $('#music-tip .switch').on('click',function(){              // 点击 开/关歌词
@@ -262,13 +249,13 @@
 
         $('#music-tip .icon-minus').on('click',function(){
           for(i in _this.timeArr){
-            _this.timeArr[i]=_this.timeArr[i]-1;
+            _this.timeArr[i]=_this.timeArr[i]+1;
           }
         });
 
         $('#music-tip .icon-plus').on('click',function(){
           for(i in _this.timeArr){
-            _this.timeArr[i]=_this.timeArr[i]+1;
+            _this.timeArr[i]=_this.timeArr[i]-1;
           }
         });
 
@@ -280,6 +267,7 @@
         $('#music-tip #frame').contents().find('#player')[0].play();
         $('#music-tip .play').removeClass('icon-play-circled2');
         $('#music-tip .play').addClass('icon-pause-circled');
+        this.setTime();
         this.playing=true;
       },
 
@@ -345,16 +333,8 @@
         return (min+':'+sec);
       },
 
-      appendChannel: function(channel_data){      // 读取频道信息 并放到side侧边栏
-        var html='';
-        for(var i=0;i<channel_data.length;i++){
-          html += '<li'+' channel_id='+i+'>'+channel_data[i]+' MHz'+'</li>';
-        };
-        $('#music-tip #side .channel').append($(html));
-      },
-
-      songSearch: function(name){             //  获取歌曲数据 此处使用网易搜索API 
-        var _this=this;                       //  以电台名进行搜索 模拟电台效果
+      songSearch: function(keyIn){             //  搜索歌曲 此处使用网易搜索API 
+        var _this=this;                     
         $.ajax({
           url: 'http://s.music.163.com/search/get/',
           type: 'GET',
@@ -362,7 +342,7 @@
           jsonp: 'callback',
           data: {
             'type': 1,
-            's': name,
+            's': keyIn,
             'limit': 50
           }
         })
@@ -390,7 +370,23 @@
         $('#music-tip .lyric-list').append('<li>本歌曲暂时无歌词</li><li>请选择豆瓣随机歌曲或点击下一曲</li>');
       },
 
-      getDouBanSong: function(){                 //  获取豆瓣随机歌曲的信息 for 豆瓣
+      getChannel: function(){             //  获取豆瓣电台频道
+        var _this=this;
+        $.get('http://api.jirengu.com/fm/getChannels.php', function(ret){
+          var ret=JSON.parse(ret);
+          _this.appendChannel(ret.channels);
+        });
+      },
+
+      appendChannel: function(data){      // 将频道信息append到side侧边栏
+        var html=''; 
+        for(var i=0;i<data.length;i++){
+          html += '<li'+' channel_id='+data[i].channel_id+'>'+data[i].name+' MHz'+'</li>';
+        };
+        $('#music-tip #side .channel').append(html);
+      },
+
+      getDouBanSong: function(channel_id){        //  获取豆瓣歌曲
 
         var _this=this;
 
@@ -398,41 +394,26 @@
         this.getingDouBan=true;
         localStorage.setItem('radioPlaying','false');
 
-        $.ajax({
-          url: 'http://api.jirengu.com/fm/getSong.php',
-          type: 'GET',
-          dataType: 'json',
-        })
-        .done(function(ret){
-          $('#music-tip #frame').contents().find('#player').css('type', 'video/mp4');
+        $.get('http://api.jirengu.com/fm/getSong.php',{channel: channel_id}, function(ret){
+          var ret=JSON.parse(ret);
           $('#music-tip #frame').contents().find('#player').attr('src', ret.song[0].url);
           $('#music-tip .song-name').text(ret.song[0].title);
           $('#music-tip .song-artist').text(ret.song[0].albumtitle+' by '+ret.song[0].artist);
           $('#music-tip .song-cover').css('background-image', 'url('+ret.song[0].picture+')');
           _this.startPlay();
-          $('#music-tip .lyric-list').text('');  // 不管有无歌词都显示此信息 有歌词后面会覆盖
-          $('#music-tip .lyric-list').append('<li>本歌曲暂时无歌词</li>');
+          $('#music-tip .lyric-list').text('');  
+          $('#music-tip .lyric-list').append('<li></li><li>本歌曲暂时无歌词</li>');
           _this.getingDouBan=false;
-          $.ajax({
-            url: 'http://api.jirengu.com/fm/getLyric.php',
-            type: 'post',
-            dataType: 'json',
-            data:{
-              ssid:ret.song[0].ssid,
-              sid:ret.song[0].sid,
-            }
-          })
-          .done(function(ret){
-            console.log(ret.lyric);
-            _this.setLyric(ret.lyric);
-          })
-          .fail(function() {
-            alert("get douban lyric error");
-          });
+          _this.getDouBanLyric(ret.song[0].ssid, ret.song[0].sid);
+        });
+      },
 
-        })
-        .fail(function() {
-          alert("get douban song error");
+      getDouBanLyric: function(ssid, sid){
+        var _this=this;
+        $.post('http://api.jirengu.com/fm/getLyric.php', {ssid: ssid, sid: sid }, function(ret){
+          var ret=JSON.parse(ret);
+          console.log(ret.lyric);
+          _this.setLyric(ret.lyric);
         });
       },
 
@@ -447,7 +428,7 @@
           lyricText=lyricText.replace(/\[offset:.+\]/g,'');
           for(j in lyricTimeArr){
             var min = Number(String(lyricTimeArr[j].match(/\[\d*/i)).slice(1)),
-            sec = Number(String(lyricTimeArr[j].match(/\:\d*/i)).slice(1));
+            sec = Number(String(lyricTimeArr[j].match(/\:\d*\.*\d*/g)).slice(1));
             var time = min * 60 + sec;
             lyricData[time]=lyricText;
           };
@@ -459,12 +440,12 @@
         this.timeArr=[];
         this.lyricData=lyricData;
         for(i in lyricData){
-          this.timeArr.push(parseInt(i));
+          this.timeArr.push(i);
         };
         this.timeArr.sort(function(a,b){
           return a-b;
         });
-        var lyricHtml='<li></li><li></li>';
+        var lyricHtml='';
         for(var i=0;i<this.timeArr.length;i++){
           lyricHtml += '<li>'+this.lyricData[this.timeArr[i]]+'</li>';
         };
@@ -476,15 +457,16 @@
       lyricShowing: function(){           //  根据时间比对 把歌词的容器进行偏移设置 呈现出滚动状态
         var curTime=$('#music-tip #frame').contents().find('#player')[0].currentTime;
         if(!this.timeArr)return;
-        for(var i=0;i<this.timeArr.length;i++){
-          if(this.timeArr[i]===Math.floor(curTime)){
-            $('#music-tip .lyric-list li').removeClass('showing');
-            $('#music-tip .lyric-list li').eq(i+2).addClass('showing');
+        for(var i=1;i<this.timeArr.length;i++){
+          if((curTime-0.1 < this.timeArr[i])&&(curTime-0.1 > this.timeArr[i-1])){
             var liHeight=0;
-            for(var j=0;j<=i;j++){
-              liHeight = liHeight+$('#music-tip .lyric-list li').eq(j).outerHeight(true)-7;
+            for(var j=0;j<=i-1;j++){
+              var eachHeight=$('#music-tip .lyric-list li').eq(j).outerHeight(true)-7;
+              liHeight += eachHeight;
             };
-            $('#music-tip .lyric-list').animate({'top':-liHeight},'400');
+            $('#music-tip .lyric-list').animate({'top':45-liHeight}, 50);
+            $('#music-tip .lyric-list li').removeClass('showing');
+            $('#music-tip .lyric-list li').eq(i-1).addClass('showing');
           };
         };
       },
