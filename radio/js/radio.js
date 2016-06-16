@@ -449,7 +449,7 @@
         console.log(lyricHtml);
         $('#music-tip .lyric-list').append(lyricHtml);
         if(!lyricHtml){
-          $('#music-tip .lyric-list').append('本歌曲暂时无对应歌曲');
+          $('#music-tip .lyric-list').append('本歌曲暂时无对应歌词');
         };
         $('#music-tip .lyric-list').css('top', 45);
         this.lyricShowing();
