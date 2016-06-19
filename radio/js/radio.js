@@ -37,7 +37,9 @@
                             +'<ul class="channel">'
                               +'<li class="icon-ok-circled">随机歌曲 MHz</li>'
                             +'</ul>'
-                            +'<ul class="search"></ul>'
+                            +'<ul class="search">'
+                              +'<li> 网易云音乐搜索功能 正在完善中</li>'
+                            +'</ul>'
                           +'</div>'
                           +'<div id="interface">'
                             +'<div class="stripe"></div>'
@@ -131,14 +133,6 @@
           if(this.innerText===$('#music-tip .douban').text()){
             $('#music-tip .channel').show();
           };
-          // if(this.innerText===$('#music-tip .douban').text()){
-          //   $('#music-tip .song-random').show();
-          //   if(!_this.doubanOn)_this.getDouBanSong();
-          //   $('#music-tip .ct').animate({left:'-231px'}, 500);          // 侧边栏归位
-          //   _this.sideStatus=false;
-          //   $('#music-tip .channel li').removeClass('icon-ok-circled'); 
-          //   _this.doubanOn=true;
-          // };
           if(this.innerText===$('#music-tip .wangyiyun').text()){
             $('#music-tip .search').show();
           };
@@ -331,32 +325,32 @@
         }else sec=String(sec);
         return (min+':'+sec);
       },
-
-      songSearch: function(keyIn){             //  搜索歌曲 此处使用网易搜索API 
-        var _this=this;                     
-        $.ajax({
-          url: 'http://s.music.163.com/search/get/',
-          type: 'GET',
-          dataType: 'jsonp',
-          jsonp: 'callback',
-          data: {
-            'type': 1,
-            's': keyIn,
-            'limit': 50
-          }
-        })
-        .done(function(ret){
-          _this.songData=ret.result.songs;
-          if(_this.firstPlay){
-            if(localStorage.getItem('radioPlaying')==='true')return;
-          };
-          _this.firstPlay=false;
-          _this.changeSong(0);
-        })
-        .fail(function() {
-          console.log("get song fail");
-        });
-      },
+       // 网易云音乐搜索功能 正在完善中
+      // songSearch: function(keyIn){             //  搜索歌曲 此处使用网易搜索API 
+      //   var _this=this;                      
+      //   $.ajax({
+      //     url: 'http://s.music.163.com/search/get/',
+      //     type: 'GET',
+      //     dataType: 'jsonp',
+      //     jsonp: 'callback',
+      //     data: {
+      //       'type': 1,
+      //       's': keyIn,
+      //       'limit': 50
+      //     }
+      //   })
+      //   .done(function(ret){
+      //     _this.songData=ret.result.songs;
+      //     if(_this.firstPlay){
+      //       if(localStorage.getItem('radioPlaying')==='true')return;
+      //     };
+      //     _this.firstPlay=false;
+      //     _this.changeSong(0);
+      //   })
+      //   .fail(function() {
+      //     console.log("get song fail");
+      //   });
+      // },
 
       changeSong: function(number){                   //  更换歌曲 下一首或新频道 for 网易云
         localStorage.setItem('radioPlaying','false');
