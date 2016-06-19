@@ -268,7 +268,7 @@
         if($('#music-tip #frame').contents().find('#player')[0].currentTime >= $('#frame').contents().find('#player')[0].duration){
           if(this.looping)return;
           if(this.doubanOn){
-            this.getDouBanSong();
+            this.getDouBanSong(this.channel_id);
           }else{
             this.curSong_id++;
             this.changeSong(this.curSong_id);
@@ -352,16 +352,16 @@
       //   });
       // },
 
-      changeSong: function(number){                   //  更换歌曲 下一首或新频道 for 网易云
-        localStorage.setItem('radioPlaying','false');
-        $('#music-tip #frame').contents().find('#player').attr('src', this.songData[number].audio);
-        $('#music-tip .song-name').text(this.songData[number].name);
-        $('#music-tip .song-artist').text(this.songData[number].name+' by '+this.songData[number].artists[0].name);
-        $('#music-tip .song-cover').css('background-image', 'url('+this.songData[number].album.picUrl+')');
-        this.startPlay();
-        $('#music-tip .lyric-list').text('');
-        $('#music-tip .lyric-list').append('<li>本歌曲暂时无歌词</li><li>请选择豆瓣随机歌曲或点击下一曲</li>');
-      },
+      // changeSong: function(number){                   //  更换歌曲 下一首或新频道 for 网易云
+      //   localStorage.setItem('radioPlaying','false');
+      //   $('#music-tip #frame').contents().find('#player').attr('src', this.songData[number].audio);
+      //   $('#music-tip .song-name').text(this.songData[number].name);
+      //   $('#music-tip .song-artist').text(this.songData[number].name+' by '+this.songData[number].artists[0].name);
+      //   $('#music-tip .song-cover').css('background-image', 'url('+this.songData[number].album.picUrl+')');
+      //   this.startPlay();
+      //   $('#music-tip .lyric-list').text('');
+      //   $('#music-tip .lyric-list').append('<li>本歌曲暂时无歌词</li><li>请选择豆瓣随机歌曲或点击下一曲</li>');
+      // },
 
       getChannel: function(){             //  获取豆瓣电台频道
         var _this=this;
@@ -382,6 +382,7 @@
       getDouBanSong: function(channel_id){        //  获取豆瓣歌曲
 
         var _this=this;
+        this.channel_id=channel_id;
 
         if(this.getingDouBan)return;
         this.getingDouBan=true;
