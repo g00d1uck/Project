@@ -180,7 +180,7 @@
 
         $('#music-tip .icon-fast-fw-outline').on('click',function(){  //  点击  下一首 
           if(_this.doubanOn){
-            _this.getDouBanSong();
+            _this.getDouBanSong(_this.channel_id);
           }else{
             _this.curSong_id++;
             _this.changeSong(_this.curSong_id);
@@ -383,6 +383,7 @@
 
         var _this=this;
         this.channel_id=channel_id;
+        console.log(this.channel_id);
 
         if(this.getingDouBan)return;
         this.getingDouBan=true;
