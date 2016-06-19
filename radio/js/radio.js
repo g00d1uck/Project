@@ -478,7 +478,7 @@
           _this.draging=false;
           $node.removeClass('drag-sign');
         });
-        $(window).on('mousemove',function(e){
+        $('body').on('mousemove',function(e){
           if(_this.draging){
             $node.css({
               left: +e.pageX-_this.left,
